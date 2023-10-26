@@ -15,6 +15,8 @@ public:
 	// Processes frameIn, places processed value into frameOut.
 	virtual void Process(const double* frameIn, double* frameOut, const double& time) = 0;
 
+	virtual void LoadXML(IXMLDOMNode* xml) = 0;
+
 private:
 	// Called immediatly after the number of channels is known.
 	virtual void ChannelsSet() { }

@@ -6,11 +6,14 @@
 #include "CInstrument.h"
 #include <vector>
 #include "CNote.h"
+#include "CEffect.h"
 
 class CSynthesizer
 {
 public:
 	CSynthesizer();
+
+	~CSynthesizer();
 
 	void Start(void);
 
@@ -39,6 +42,7 @@ public:
 	double GetTime() { return m_time; }
 
 private:
+	std::vector<CEffect*> m_effects;
 	int m_channels;
 	double m_sampleRate;
 	double m_samplePeriod;
@@ -73,6 +77,7 @@ private:
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);
+	void XmlLoadEffectList(IXMLDOMNode* xml);
 	void XmlLoadEffect(IXMLDOMNode* xml);
 	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);	
 };

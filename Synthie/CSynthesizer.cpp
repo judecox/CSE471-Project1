@@ -6,6 +6,7 @@
 
 #include "CToneInstrument.h"
 #include "xmlhelp.h"
+#include "CNoiseGate.h"
 
 using namespace std;
 
@@ -21,6 +22,16 @@ CSynthesizer::CSynthesizer()
 	m_bpm = 120;
 	m_secperbeat = 0.5;
 	m_beatspermeasure = 4;
+
+	m_effects = std::vector<CEffect*>();
+}
+
+CSynthesizer::~CSynthesizer()
+{
+	for (size_t i = 0; i < m_effects.size(); i++)
+	{
+		delete m_effects[i];
+	}
 }
 
 //! Start the synthesizer
@@ -278,9 +289,9 @@ void CSynthesizer::XmlLoadScore(IXMLDOMNode* xml)
 		{
 			XmlLoadInstrument(node);
 		}
-		else if (name == L"effect")
+		else if (name == "effects")
 		{
-			XmlLoadEffect(node);
+			XmlLoadEffectList(node);
 		}
 	}
 }
@@ -333,9 +344,19 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 	}
 }
 
+void CSynthesizer::XmlLoadEffectList(IXMLDOMNode* xml)
+{
+	CComPtr<IXMLDOMNode> node;
+	xml->get_firstChild(&node);
+	for (; node != NULL; NextNode(node))
+	{
+		XmlLoadEffect(node);
+	}
+}
+
 void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
 {
-	wstring effectType = L"";
+	// Get name of node and create effect from the name.
 
 	// Get a list of all attribute nodes and the
 	// length of that list
@@ -344,22 +365,14 @@ void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
 	long len;
 	attributes->get_length(&len);
 
-	// Loop over the list of attributes
-	for (int i = 0; i < len; i++)
+	// Get the name of the node
+	CComBSTR nodeName;
+	xml->get_nodeName(&nodeName);
+
+	if (nodeName == L"gate")
 	{
-		// Get attribute i
-		CComPtr<IXMLDOMNode> attrib;
-		attributes->get_item(i, &attrib);
-
-		// Get the name of the attribute
-		CComBSTR name;
-		attrib->get_nodeName(&name);
-
-		// Get the value of the attribute.  
-		CComVariant value;
-		attrib->get_nodeValue(&value);
-
-		effectType = value.bstrVal;
+		//CNoiseGate gate = CNoiseGate(m_channels);
+		//gate.LoadXML(xml);
 	}
 }
 

@@ -26,9 +26,9 @@ public:
 
 	// Variables
 private:
-	Stage* m_stages;
+	std::vector<Stage> m_stages;
 
-	double* m_times;
+	std::vector<double> m_times;
 
 	// Level of the threshold. Note that the volumn here ranges from 0-1.
 	double m_threshold = 0.5;
@@ -47,14 +47,11 @@ private:
 public:
 	CNoiseGate(int channels) : CEffect(channels) {}
 
-	~CNoiseGate()
-	{
-		delete [] m_stages;
-		delete[] m_times;
-	}
-
 	// Inherited via CEffect
 	void Process(const double* frameIn, double* frameOut, const double& time) override;
+
+	// Inherited via CEffect
+	void LoadXML(IXMLDOMNode* xml) override;
 
 private:
 	void ChannelsSet() override;
