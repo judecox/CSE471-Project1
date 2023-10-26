@@ -132,7 +132,9 @@
     <ClCompile Include="audio\DirSoundStream.cpp" />
     <ClCompile Include="CARSineWave.cpp" />
     <ClCompile Include="CAudioNode.cpp" />
+    <ClCompile Include="CEffect.cpp" />
     <ClCompile Include="CInstrument.cpp" />
+    <ClCompile Include="CNoiseGate.cpp" />
     <ClCompile Include="CNote.cpp" />
     <ClCompile Include="CSineWave.cpp" />
     <ClCompile Include="CSynthesizer.cpp" />
@@ -157,7 +159,9 @@
     <ClInclude Include="audio\DirSoundStream.h" />
     <ClInclude Include="CARSineWave.h" />
     <ClInclude Include="CAudioNode.h" />
+    <ClInclude Include="CEffect.h" />
     <ClInclude Include="CInstrument.h" />
+    <ClInclude Include="CNoiseGate.h" />
     <ClInclude Include="CNote.h" />
     <ClInclude Include="CSineWave.h" />
     <ClInclude Include="CSynthesizer.h" />

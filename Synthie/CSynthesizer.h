@@ -73,6 +73,7 @@ private:
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);
+	void XmlLoadEffect(IXMLDOMNode* xml);
 	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);	
 };
 

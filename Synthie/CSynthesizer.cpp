@@ -130,6 +130,10 @@ bool CSynthesizer::Generate(double* frame)
 	}
 
 	//
+	// Phase 3.5: Effects
+	//
+
+	//
 	// Phase 4: Advance the time and beats
 	//
 
@@ -274,6 +278,10 @@ void CSynthesizer::XmlLoadScore(IXMLDOMNode* xml)
 		{
 			XmlLoadInstrument(node);
 		}
+		else if (name == L"effect")
+		{
+			XmlLoadEffect(node);
+		}
 	}
 }
 
@@ -322,6 +330,36 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 		{
 			XmlLoadNote(node, instrument);
 		}
+	}
+}
+
+void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
+{
+	wstring effectType = L"";
+
+	// Get a list of all attribute nodes and the
+	// length of that list
+	CComPtr<IXMLDOMNamedNodeMap> attributes;
+	xml->get_attributes(&attributes);
+	long len;
+	attributes->get_length(&len);
+
+	// Loop over the list of attributes
+	for (int i = 0; i < len; i++)
+	{
+		// Get attribute i
+		CComPtr<IXMLDOMNode> attrib;
+		attributes->get_item(i, &attrib);
+
+		// Get the name of the attribute
+		CComBSTR name;
+		attrib->get_nodeName(&name);
+
+		// Get the value of the attribute.  
+		CComVariant value;
+		attrib->get_nodeValue(&value);
+
+		effectType = value.bstrVal;
 	}
 }
 
