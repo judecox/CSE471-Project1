@@ -45,15 +45,12 @@ private:
 	
 
 public:
-	CNoiseGate(int channels) : CEffect(channels) {}
+	CNoiseGate(int channels);
 
 	// Inherited via CEffect
 	void Process(const double* frameIn, double* frameOut, const double& time) override;
 
 	// Inherited via CEffect
-	void LoadXML(IXMLDOMNode* xml) override;
-
-private:
-	void ChannelsSet() override;
+	void XmlLoad(IXMLDOMNode* xml) override;
 };
 

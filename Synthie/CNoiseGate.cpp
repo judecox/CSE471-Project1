@@ -1,13 +1,14 @@
 #include "pch.h"
 #include "CNoiseGate.h"
 
-void CNoiseGate::ChannelsSet()
+
+CNoiseGate::CNoiseGate(int channels) : CEffect(channels)
 {
 	m_stages = std::vector<Stage>(m_channels);
 	m_times = std::vector<double>(m_channels);
 }
 
-void CNoiseGate::LoadXML(IXMLDOMNode* xml)
+void CNoiseGate::XmlLoad(IXMLDOMNode* xml)
 {
 	// Get a list of all attribute nodes and the
 	// length of that list
@@ -82,11 +83,15 @@ void CNoiseGate::Process(const double* frameIn, double* frameOut, const double& 
 		case Attack:
 		{
 			const double fAtk = (time - m_times[i]) / m_attack;
-			frameOut[i] = fAtk * frameIn[i];
 
 			if (fAtk >= 1)
 			{
 				m_stages[i] = Open;
+				frameOut[i] = frameIn[i];
+			}
+			else
+			{
+				frameOut[i] = fAtk * frameIn[i];
 			}
 			break;
 		}
@@ -102,22 +107,45 @@ void CNoiseGate::Process(const double* frameIn, double* frameOut, const double& 
 		}
 		case Hold:
 		{
-			frameOut[i] = frameIn[i];
-
-			if (time - m_times[i] >= m_hold)
+			if (frameIn[i] >= m_threshold)
 			{
-				m_stages[i] = Release;
-				m_times[i] = time;
+				// Back in threshold. Go back to open state.
+				frameOut[i] = frameIn[i];
+				m_stages[i] = Open;
 			}
+			else
+			{
+				frameOut[i] = frameIn[i];
+
+				if (time - m_times[i] >= m_hold)
+				{
+					m_stages[i] = Release;
+					m_times[i] = time;
+				}
+			}
+			break;
 		}
 		case Release:
 		{
-			const double fRls = (time - m_times[i]) / m_release;
-			frameOut[i] = frameIn[i] * (1 - fRls);
-
-			if (fRls >= 1)
+			if (frameIn[i] >= m_threshold)
 			{
-				m_stages[i] = Closed;
+				// Back in threshold. Go back to open state.
+				frameOut[i] = frameIn[i];
+				m_stages[i] = Open;
+			}
+			else
+			{
+				const double fRls = (time - m_times[i]) / m_release;
+
+				if (fRls >= 1)
+				{
+					m_stages[i] = Closed;
+					frameOut[i] = 0;
+				}
+				else
+				{
+					frameOut[i] = frameIn[i] * (1 - fRls);
+				}
 			}
 			break;
 		}

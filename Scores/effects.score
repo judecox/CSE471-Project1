@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <score bpm="120" beatspermeasure="2">
 	<effects>
-		<gate threshold="0.6" attack="0.5" hold="0.1" release="0.3445" />
+		<gate threshold="0.1" attack="0.1" hold="0.3" release="0.3" />
 	</effects>
 	<instrument instrument="ToneInstrument">
 		<note measure="1" beat="2" duration="0.33" note="F4" />

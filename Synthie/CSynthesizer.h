@@ -3,8 +3,8 @@
 
 #include <list>
 #include <string>
-#include "CInstrument.h"
 #include <vector>
+#include "CInstrument.h"
 #include "CNote.h"
 #include "CEffect.h"
 
@@ -12,8 +12,6 @@ class CSynthesizer
 {
 public:
 	CSynthesizer();
-
-	~CSynthesizer();
 
 	void Start(void);
 
@@ -42,7 +40,6 @@ public:
 	double GetTime() { return m_time; }
 
 private:
-	std::vector<CEffect*> m_effects;
 	int m_channels;
 	double m_sampleRate;
 	double m_samplePeriod;
@@ -72,6 +69,7 @@ private:
 	/// </summary>
 	double m_beat;
 
+	std::vector<CEffect*> m_effects;
 	std::list<CInstrument*>  m_instruments;
 	std::vector<CNote*> m_notes;
 

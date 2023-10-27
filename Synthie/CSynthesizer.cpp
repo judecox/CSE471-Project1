@@ -5,7 +5,6 @@
 #include <memory>
 
 #include "CToneInstrument.h"
-#include "CPiano.h"
 #include "xmlhelp.h"
 #include "CNoiseGate.h"
 
@@ -25,14 +24,6 @@ CSynthesizer::CSynthesizer()
 	m_beatspermeasure = 4;
 
 	m_effects = std::vector<CEffect*>();
-}
-
-CSynthesizer::~CSynthesizer()
-{
-	for (size_t i = 0; i < m_effects.size(); i++)
-	{
-		delete m_effects[i];
-	}
 }
 
 //! Start the synthesizer
@@ -72,8 +63,8 @@ bool CSynthesizer::Generate(double* frame)
 		// Play the note!
 		//
 
-		// Create the instrument object based on the specified "instrument" tag
-		
+		// Create the instrument object
+
 		if (note.Instrument() == L"ToneInstrument")
 		{
 			std::unique_ptr<CToneInstrument> instrument = std::make_unique<CToneInstrument>();
@@ -85,20 +76,6 @@ bool CSynthesizer::Generate(double* frame)
 
 			m_instruments.push_back(instrument.release());
 		}
-
-		if (note.Instrument() == L"Piano")
-		{
-			std::unique_ptr<CPiano> instrument = std::make_unique<CPiano>();
-
-			// Configure the instrument object
-			instrument->SetSampleRate(GetSampleRate(), m_bpm);
-			instrument->SetNote(&note);
-			instrument->Start();
-
-			m_instruments.push_back(instrument.release());
-		}
-
-		// ADD OTHER INSTRUMENTS HERE (I believe)
 
 		m_currentNote++;
 	}
@@ -158,6 +135,19 @@ bool CSynthesizer::Generate(double* frame)
 	//
 	// Phase 3.5: Effects
 	//
+	double* frameout = (double*)calloc(m_channels, sizeof(double));
+	for each (CEffect* effect in m_effects)
+	{
+		// Process the frame. Make sure to use two different arrays to avoid
+		// funny C++ activity.
+		effect->Process(frame, frameout, m_time);
+		
+		for (int c = 0; c < m_channels; c++)
+		{
+			frame[c] = frameout[c];
+		}
+	}
+	free(frameout);
 
 	//
 	// Phase 4: Advance the time and beats
@@ -192,6 +182,22 @@ bool CSynthesizer::Generate(double* frame)
 
 void CSynthesizer::Clear(void)
 {
+	for each (CEffect * effect in m_effects)
+	{
+		delete effect;
+	}
+
+	for each (CInstrument * instrument in m_instruments)
+	{
+		delete instrument;
+	}
+
+	for each (CNote * note in m_notes)
+	{
+		delete note;
+	}
+
+	m_effects.clear();
 	m_instruments.clear();
 	m_notes.clear();
 }
@@ -386,8 +392,10 @@ void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
 
 	if (nodeName == L"gate")
 	{
-		//CNoiseGate gate = CNoiseGate(m_channels);
-		//gate.LoadXML(xml);
+		CNoiseGate* gate = new CNoiseGate(m_channels);
+		gate->XmlLoad(xml);
+
+		m_effects.push_back(gate);
 	}
 }
 
