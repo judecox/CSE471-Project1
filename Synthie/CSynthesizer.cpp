@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "CToneInstrument.h"
+#include "CPiano.h"
 #include "xmlhelp.h"
 #include "CNoiseGate.h"
 
@@ -63,7 +64,7 @@ bool CSynthesizer::Generate(double* frame)
 		// Play the note!
 		//
 
-		// Create the instrument object
+		// Create the instrument object based on the specified "instrument" tag
 
 		if (note.Instrument() == L"ToneInstrument")
 		{
@@ -76,6 +77,21 @@ bool CSynthesizer::Generate(double* frame)
 
 			m_instruments.push_back(instrument.release());
 		}
+
+		else if (note.Instrument() == L"Piano")
+		{
+			std::unique_ptr<CPiano> instrument = std::make_unique<CPiano>();
+
+			// Configure the instrument object
+			instrument->SetSampleRate(GetSampleRate(), m_bpm);
+			instrument->SetNote(&note);
+			instrument->Start();
+
+			m_instruments.push_back(instrument.release());
+		}
+
+		// ADD OTHER INSTRUMENTS HERE (I believe)
+
 
 		m_currentNote++;
 	}
