@@ -105,6 +105,12 @@
     <ClCompile Include="CRecordedAudioCFlange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CWaveform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CWavetable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio\DirSound.h">
@@ -205,6 +211,12 @@
 =======
     <ClInclude Include="CRecordedAudio.h">
 >>>>>>> 9852ab60b5e06d484181c9d6d61b59b809605c53
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CWaveform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CWavetable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

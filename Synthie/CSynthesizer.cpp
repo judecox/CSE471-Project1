@@ -10,6 +10,7 @@
 #include "xmlhelp.h"
 #include "CNoiseGate.h"
 #include "CCompressor.h"
+#include "CWavetable.h"
 
 using namespace std;
 
@@ -111,7 +112,7 @@ bool CSynthesizer::Generate(double* frame)
 		}
 		else if (instrName == L"wavetable")
 		{
-			// instrument = new wavetable.
+			instrument = new CWavetable;
 		}
 
 		if (instrument != nullptr)
