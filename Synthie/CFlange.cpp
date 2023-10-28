@@ -45,7 +45,8 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 
 
 		// Feedback
-		m_frameHistory[m_bufferIndex] = output * m_feedback;
+		m_frameHistory[m_bufferIndex] = output * m_feedback + 
+			frameIn[c] * (1 - m_feedback);
 
 		// Next index
 		m_bufferIndex = std::fmod(++m_bufferIndex, m_bufferSize);

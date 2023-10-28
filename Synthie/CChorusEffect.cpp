@@ -18,8 +18,64 @@ CChorusEffect::CChorusEffect(int channels, double sampleRate, double samplePerio
 
 void CChorusEffect::Process(const double* frameIn, double* frameOut, const double& time)
 {
+	// Calculate the delay due to rate and amount.
+	const int delayed = std::ceil(m_amplitude * sin(m_phase * 2 * PI) * m_sampleRate - m_amplitude);
+	m_phase += m_frequency * m_samplePeriod;
+
+	// Use frameHistory as a circular buffer.
+	for (int c = 0; c < m_channels; c++)
+	{
+		const double input = frameIn[c];
+		double output = frameOut[c];
+
+		int i = std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
+
+		if (i < 0)
+			i += m_bufferSize;
+
+		// Set output, include wetness.
+		output = input * (1.0 - m_wetness);
+		output += m_frameHistory[i] * m_wetness;
+
+
+		//// Feedback
+		//m_frameHistory[m_bufferIndex] = output * m_feedback;
+
+		// Next index
+		m_bufferIndex = std::fmod(++m_bufferIndex, m_bufferSize);
+
+		// Write output
+		frameOut[c] = output;
+	}
 }
 
 void CChorusEffect::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value)
 {
+	// These parameters were optained from 
+	// https://www.youtube.com/watch?v=zmN7fK3fKUE
+	if (name == L"rate")
+	{
+		value.ChangeType(VT_R8);
+		m_frequency = value.dblVal;
+	}
+	else if (name == L"amount")
+	{
+		value.ChangeType(VT_R8);
+		m_amplitude = value.dblVal;
+	}
+	else if (name == L"phase")
+	{
+		value.ChangeType(VT_R8);
+		m_phase = value.dblVal;
+	}
+	else if (name == L"mix" || name == L"wetness")
+	{
+		value.ChangeType(VT_R8);
+		m_wetness = value.dblVal;
+	}
+	else if (name == L"offset")
+	{
+		value.ChangeType(VT_R8);
+		m_balanceOffset = value.dblVal;
+	}
 }

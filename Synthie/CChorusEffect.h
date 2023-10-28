@@ -9,6 +9,7 @@ private:
 	double m_amplitude;
 	double m_frequency;
 	double m_phase;
+	double m_balanceOffset;
 	double m_wetness;
 
 	std::vector<double> m_frameHistory;
