@@ -142,6 +142,7 @@
     <ClCompile Include="CNote.cpp" />
     <ClCompile Include="CParallelEffects.cpp" />
     <ClCompile Include="CPiano.cpp" />
+    <ClCompile Include="CRecordedAudio.cpp" />
     <ClCompile Include="CSerialEffects.cpp" />
     <ClCompile Include="CSineWave.cpp" />
     <ClCompile Include="CSynthesizer.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="CNote.h" />
     <ClInclude Include="CParallelEffects.h" />
     <ClInclude Include="CPiano.h" />
+    <ClInclude Include="CRecordedAudio.h" />
     <ClInclude Include="CSerialEffects.h" />
     <ClInclude Include="CSineWave.h" />
     <ClInclude Include="CSynthesizer.h" />

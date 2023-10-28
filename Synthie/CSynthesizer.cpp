@@ -92,21 +92,30 @@ bool CSynthesizer::Generate(double* frame)
 		// Create the instrument object based on the specified "instrument" tag
 
 		const std::wstring& instrName = note.Instrument();
+		CInstrument* instrument = nullptr;
 		if (instrName == L"ToneInstrument")
 		{
-			CToneInstrument* instrument = new CToneInstrument();
-
-			// Configure the instrument object
-			instrument->SetSampleRate(GetSampleRate(), m_bpm);
-			instrument->SetNote(&note);
-			instrument->Start();
-
-			m_instruments.push_back(instrument);
+			instrument = new CToneInstrument();
 		}
 		else if (instrName == L"piano")
 		{
-			CPiano* instrument = new CPiano();
+			instrument = new CPiano();
+		}
+		else if (instrName == L"recorded")
+		{
+			// instrument = new prerecorded synth.
+		}
+		else if (instrName == L"organ")
+		{
+			// instrument = new organ.
+		}
+		else if (instrName == L"wavetable")
+		{
+			// instrument = new wavetable.
+		}
 
+		if (instrument != nullptr)
+		{
 			// Configure the instrument object
 			instrument->SetSampleRate(GetSampleRate(), m_bpm);
 			instrument->SetNote(&note);
@@ -114,21 +123,6 @@ bool CSynthesizer::Generate(double* frame)
 
 			m_instruments.push_back(instrument);
 		}
-		else if (instrName == L"recorded")
-		{
-			// TODO: Implement prerecorded synth.
-		}
-		else if (instrName == L"organ")
-		{
-			// TODO: Implement organ.
-		}
-		else if (instrName == L"wavetable")
-		{
-			// TODO: Implement wavetable.
-		}
-
-		// ADD OTHER INSTRUMENTS HERE (I believe)
-
 
 		m_currentNote++;
 	}

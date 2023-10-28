@@ -7,6 +7,7 @@
 #include "CInstrument.h"
 #include "CNote.h"
 #include "CEffect.h"
+#include "CRecordedAudio.h"
 #include <map>
 
 class CSynthesizer
@@ -76,6 +77,8 @@ private:
 	std::map<std::wstring, CEffect*> m_effectCatalog;
 	std::list<CInstrument*>  m_instruments;
 	std::vector<CNote*> m_notes;
+
+	CRecordedAudio m_recorded;
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);
