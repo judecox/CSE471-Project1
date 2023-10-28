@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "CToneInstrument.h"
+#include "CEffectFactory.h"
 #include "CPiano.h"
 #include "xmlhelp.h"
 #include "CNoiseGate.h"
@@ -48,6 +49,7 @@ CSynthesizer::~CSynthesizer()
 	m_effects.clear();
 	m_instruments.clear();
 	m_notes.clear();
+	m_effectCatalog.clear();
 }
 
 //! Start the synthesizer
@@ -413,7 +415,7 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 		{
 			XmlLoadNote(node, instrument);
 		}
-		else if (name == L"send")
+		else if (name == L"sendEffect")
 		{
 			XmlLoadSend(node, instrument);
 		}
@@ -422,43 +424,19 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 
 void CSynthesizer::XmlLoadEffectList(IXMLDOMNode* xml)
 {
-	CComPtr<IXMLDOMNode> node;
-	xml->get_firstChild(&node);
-	for (; node != NULL; NextNode(node))
+	CEffectFactory effFactory(m_channels);
+	auto effects = effFactory.XmlLoadEffects(xml);
+	
+	for each (auto* eff in effects)
 	{
-		XmlLoadEffect(node);
+		AddEffect(eff);
 	}
 }
 
-void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
+void CSynthesizer::AddEffect(CEffect* effect)
 {
-	// Get name of node and create effect from the name.
-
-	// Get a list of all attribute nodes and the
-	// length of that list
-	CComPtr<IXMLDOMNamedNodeMap> attributes;
-	xml->get_attributes(&attributes);
-	long len;
-	attributes->get_length(&len);
-
-	// Get the name of the node
-	CComBSTR nodeName;
-	xml->get_nodeName(&nodeName);
-
-	if (nodeName == L"gate")
-	{
-		CNoiseGate* gate = new CNoiseGate(m_channels);
-		gate->XmlLoad(xml);
-
-		m_effects.push_back(gate);
-	}
-	else if (nodeName == L"compress")
-	{
-		CCompressor* compress = new CCompressor(m_channels);
-		compress->XmlLoad(xml);
-
-		m_effects.push_back(compress);
-	}
+	m_effects.push_back(effect);
+	m_effectCatalog[effect->m_id] = effect;
 }
 
 void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)

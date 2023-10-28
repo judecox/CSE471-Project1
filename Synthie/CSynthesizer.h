@@ -7,6 +7,7 @@
 #include "CInstrument.h"
 #include "CNote.h"
 #include "CEffect.h"
+#include <map>
 
 class CSynthesizer
 {
@@ -72,13 +73,14 @@ private:
 	double m_beat;
 
 	std::vector<CEffect*> m_effects;
+	std::map<std::wstring, CEffect*> m_effectCatalog;
 	std::list<CInstrument*>  m_instruments;
 	std::vector<CNote*> m_notes;
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);
 	void XmlLoadEffectList(IXMLDOMNode* xml);
-	void XmlLoadEffect(IXMLDOMNode* xml);
+	void AddEffect(CEffect* effect);
 	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
 	void XmlLoadSend(IXMLDOMNode* xml, std::wstring& instrument);
 };

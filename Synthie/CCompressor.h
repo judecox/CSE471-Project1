@@ -58,6 +58,7 @@ private:
 	// This does not consider the attack and release phases.
 	double GetDeltaGain(double frameIn);
 
+protected:
 	// Inherited via CEffect
 	void XmlLoadAttribute(const CComBSTR& name, CComVariant& value) override;
 };

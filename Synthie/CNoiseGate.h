@@ -50,6 +50,7 @@ public:
 	// Inherited via CEffect
 	void Process(const double* frameIn, double* frameOut, const double& time) override;
 
+protected:
 	// Inherited via CEffect
 	void XmlLoadAttribute(const CComBSTR & name, CComVariant & value) override;
 };

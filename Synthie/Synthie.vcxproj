@@ -134,10 +134,13 @@
     <ClCompile Include="CAudioNode.cpp" />
     <ClCompile Include="CCompressor.cpp" />
     <ClCompile Include="CEffect.cpp" />
+    <ClCompile Include="CEffectFactory.cpp" />
+    <ClCompile Include="CEffectsGroup.cpp" />
     <ClCompile Include="CInstrument.cpp" />
     <ClCompile Include="CNoiseGate.cpp" />
     <ClCompile Include="CNote.cpp" />
     <ClCompile Include="CPiano.cpp" />
+    <ClCompile Include="CSerialEffects.cpp" />
     <ClCompile Include="CSineWave.cpp" />
     <ClCompile Include="CSynthesizer.cpp" />
     <ClCompile Include="CToneInstrument.cpp" />
@@ -163,10 +166,13 @@
     <ClInclude Include="CAudioNode.h" />
     <ClInclude Include="CCompressor.h" />
     <ClInclude Include="CEffect.h" />
+    <ClInclude Include="CEffectFactory.h" />
+    <ClInclude Include="CEffectsGroup.h" />
     <ClInclude Include="CInstrument.h" />
     <ClInclude Include="CNoiseGate.h" />
     <ClInclude Include="CNote.h" />
     <ClInclude Include="CPiano.h" />
+    <ClInclude Include="CSerialEffects.h" />
     <ClInclude Include="CSineWave.h" />
     <ClInclude Include="CSynthesizer.h" />
     <ClInclude Include="CToneInstrument.h" />
