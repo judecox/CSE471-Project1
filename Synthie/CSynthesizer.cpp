@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "CToneInstrument.h"
+#include "CPiano.h"
 #include "xmlhelp.h"
 #include "CNoiseGate.h"
 #include "CCompressor.h"
@@ -64,7 +65,8 @@ bool CSynthesizer::Generate(double* frame)
 		// Play the note!
 		//
 
-		// Create the instrument object
+		// Create the instrument object based on the specified "instrument" tag
+
 		const std::wstring& instrName = note.Instrument();
 		if (instrName == L"ToneInstrument")
 		{
@@ -79,7 +81,14 @@ bool CSynthesizer::Generate(double* frame)
 		}
 		else if (instrName == L"piano")
 		{
-			// TODO: Implement piano.
+			CPiano* instrument = new CPiano();
+
+			// Configure the instrument object
+			instrument->SetSampleRate(GetSampleRate(), m_bpm);
+			instrument->SetNote(&note);
+			instrument->Start();
+
+			m_instruments.push_back(instrument);
 		}
 		else if (instrName == L"recorded")
 		{
@@ -93,6 +102,9 @@ bool CSynthesizer::Generate(double* frame)
 		{
 			// TODO: Implement wavetable.
 		}
+
+		// ADD OTHER INSTRUMENTS HERE (I believe)
+
 
 		m_currentNote++;
 	}
