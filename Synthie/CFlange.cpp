@@ -1,41 +1,42 @@
 #include "pch.h"
 #include "CFlange.h"
+#include <cmath>
 
 CFlange::CFlange(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod)
 {
-	m_delay = 0;
 	m_phase = 0;
 	m_frequency = 1;
 	m_amplitude = 1;
 
-	m_delayedFrame = (double*)calloc(m_channels, sizeof(double));
+	m_bufferIndex = 0;
+	m_bufferSize = std::ceil(m_channels * m_amplitude * m_sampleRate);
+
+	m_frameHistory = std::vector<double>(m_bufferSize);
 }
 
 CFlange::~CFlange()
 {
-	if (m_delayedFrame != nullptr)
-	{
-		free(m_delayedFrame);
-	}
+
 }
 
 void CFlange::Process(const double* frameIn, double* frameOut, const double& time)
 {
+	const int delayed = std::ceil(m_amplitude * sin(m_phase * 2 * PI) * m_sampleRate - m_amplitude);
+	m_phase += m_frequency * m_samplePeriod;
+
+	// Use frameHistory as a circular buffer.
 	for (int c = 0; c < m_channels; c++)
 	{
-		double median = m_amplitude / -2.0;
-		double delayedTime = time - sin(m_phase * 2 * PI);
+		m_frameHistory[m_bufferIndex] = frameIn[c];
 
-		if (delayedTime <= 0)
-		{
-			// In negative time.
-			std::copy(frameIn, frameIn + m_channels, m_delayedFrame);
-		}
+		int i = std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
 
-		//for (int c = 0; c < m_channels; c++)
-		//{
-		//	frameOut[c] = frameIn[c] + m_delayedFrames;
-		//}
+		if (i < 0)
+			i += m_bufferSize;
+
+		frameOut[c] = (frameIn[c] + m_frameHistory[i]) / 2.0;
+
+		m_bufferIndex = std::fmod(++m_bufferIndex, m_bufferSize);
 	}
 }
 

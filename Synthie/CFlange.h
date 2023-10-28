@@ -10,8 +10,9 @@ private:
 	double m_frequency;
 	double m_phase;
 
-	double m_delay;
-	double* m_delayedFrame;
+	std::vector<double> m_frameHistory;
+	int m_bufferIndex;
+	int m_bufferSize;
 
 	// Contructors
 public:
