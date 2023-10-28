@@ -10,12 +10,15 @@ class CRecordedAudio :
 {
 public:
     CRecordedAudio();
+    ~CRecordedAudio();
     void Start();
     bool Generate();
     CDirSoundSource   m_wavein;
     CWaveOut          m_waveout;
     CWaveformBuffer m_waveformBuffer;
     void SetFuzz(double fuzz) { m_fuzz = fuzz; }
+    double FrameValue(int c) { return m_frame[c]; }
+    double SetAmplitude(double amp) { m_amplitude = amp; }
     
 private:
     int m_duration; //duration in frames
@@ -24,5 +27,6 @@ private:
     double m_time;
     double m_frame[2];
     double m_fuzz = 0.0;
+    double m_amplitude = 1.0;
 };
 

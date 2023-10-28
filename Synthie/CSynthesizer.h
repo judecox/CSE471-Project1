@@ -43,6 +43,8 @@ public:
 	//! Get the time since we started generating audio
 	double GetTime() { return m_time; }
 
+	bool LoadRecordedSound(CRecordedAudio &source);
+
 private:
 	int m_channels;
 	double m_sampleRate;

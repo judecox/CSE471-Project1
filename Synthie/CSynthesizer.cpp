@@ -60,6 +60,9 @@ void CSynthesizer::Start(void)
 	m_measure = 0;
 	m_beat = 0;
 	m_time = 0;
+	m_recorded.Start();
+
+	LoadRecordedSound(m_recorded);
 }
 
 //! Generate one audio frame
@@ -183,6 +186,22 @@ bool CSynthesizer::Generate(double* frame)
 
 		// Move to the next instrument in the list
 		node = next;
+	}
+
+	// Phase 3.1: Play Recorded Performance
+	if (m_recorded.Generate())
+	{
+		// If we returned true, we have a valid sample.  Add it 
+		// to the frame.
+		for (int c = 0; c < GetNumChannels(); c++)
+		{
+			double test = m_recorded.FrameValue(c);
+			if (test != 0)
+			{
+				test = test;
+			}
+			frame[c] += m_recorded.FrameValue(c);
+		}
 	}
 
 	//
@@ -449,4 +468,21 @@ void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)
 void CSynthesizer::XmlLoadSend(IXMLDOMNode* xml, std::wstring& instrument)
 {
 
+}
+
+bool CSynthesizer::LoadRecordedSound(CRecordedAudio &source)
+{
+	static WCHAR BASED_CODE szFilter[] = L"Wave Files (*.wav)|*.wav|All Files (*.*)|*.*||";
+
+	CFileDialog dlg(TRUE, L".wav", NULL, 0, szFilter, NULL);
+	if (dlg.DoModal() != IDOK)
+		return false;
+
+	if (!source.m_wavein.Open(dlg.GetPathName()))
+		return FALSE;
+
+	m_sampleRate = source.m_wavein.SampleRate();
+	m_channels = source.m_wavein.NumChannels();
+
+	return TRUE;
 }
