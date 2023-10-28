@@ -71,7 +71,7 @@ private:
 
 	std::vector<CEffect*> m_effects;
 	std::list<CInstrument*>  m_instruments;
-	std::vector<CNote*> m_notes;
+	std::vector<CNote> m_notes;
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);

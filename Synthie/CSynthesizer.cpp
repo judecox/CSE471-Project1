@@ -48,63 +48,56 @@ bool CSynthesizer::Generate(double* frame)
 	while (m_currentNote < (int)m_notes.size())
 	{
 		// Get a pointer to the current note
-		CNote note = *m_notes.at(m_currentNote);
+		CNote* note = &m_notes.at(m_currentNote);
 
 		// If the measure is in the future we can't play
 		// this note just yet.
-		if (note.Measure() > m_measure)
+		if (note->Measure() > m_measure)
 			break;
 
 		// If this is the current measure, but the
 		// beat has not been reached, we can't play
 		// this note.
-		if (note.Measure() == m_measure && note.Beat() > m_beat)
+		if (note->Measure() == m_measure && note->Beat() > m_beat)
 			break;
 
 		//
 		// Play the note!
 		//
 
-		// Create the instrument object based on the specified "instrument" tag
-
-		const std::wstring& instrName = note.Instrument();
-		if (instrName == L"ToneInstrument")
+		// Create the instrument object
+		CInstrument* instrument = NULL;
+		if (note->Instrument() == L"ToneInstrument")
 		{
-			CToneInstrument* instrument = new CToneInstrument();
+			instrument = new CToneInstrument();
+		}
+		else if (note->Instrument() == L"Piano")
+		{
+			//instrument = new 
+		}
+		else if (note->Instrument() == L"Prerecorded")
+		{
+			//instrument = new 
+		}
+		else if (note->Instrument() == L"Organ")
+		{
+			//instrument = new 
+		}
+		else if (note->Instrument() == L"Wavetable")
+		{
+			//instrument = new 
+		}
 
-			// Configure the instrument object
-			instrument->SetSampleRate(GetSampleRate(), m_bpm);
-			instrument->SetNote(&note);
+		// Configure the instrument object
+		if (instrument != NULL)
+		{
+			instrument->SetSampleRate(GetSampleRate());
+			instrument->SetBPM(m_bpm);
+			instrument->SetNote(note);
 			instrument->Start();
 
 			m_instruments.push_back(instrument);
 		}
-		else if (instrName == L"piano")
-		{
-			CPiano* instrument = new CPiano();
-
-			// Configure the instrument object
-			instrument->SetSampleRate(GetSampleRate(), m_bpm);
-			instrument->SetNote(&note);
-			instrument->Start();
-
-			m_instruments.push_back(instrument);
-		}
-		else if (instrName == L"recorded")
-		{
-			// TODO: Implement prerecorded synth.
-		}
-		else if (instrName == L"organ")
-		{
-			// TODO: Implement organ.
-		}
-		else if (instrName == L"wavetable")
-		{
-			// TODO: Implement wavetable.
-		}
-
-		// ADD OTHER INSTRUMENTS HERE (I believe)
-
 
 		m_currentNote++;
 	}
@@ -221,11 +214,6 @@ void CSynthesizer::Clear(void)
 		delete instrument;
 	}
 
-	for each (CNote * note in m_notes)
-	{
-		delete note;
-	}
-
 	m_effects.clear();
 	m_instruments.clear();
 	m_notes.clear();
@@ -278,10 +266,7 @@ void CSynthesizer::OpenScore(CString& filename)
 	}
 
 	// Sort the notes.
-	sort(m_notes.begin(), m_notes.end(), [](CNote* n1, CNote* n2)
-		{
-			return n1->operator<(*n2);
-		});
+	sort(m_notes.begin(), m_notes.end());
 }
 
 void CSynthesizer::XmlLoadScore(IXMLDOMNode* xml)
@@ -437,7 +422,6 @@ void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
 
 void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)
 {
-	CNote* note = new CNote();
-	note->XmlLoad(xml, instrument, m_bpm);
-	m_notes.push_back(note);
+	m_notes.push_back(CNote());
+	m_notes.back().XmlLoad(xml, instrument);
 }

@@ -1,4 +1,6 @@
 #pragma once
+#include "pch.h"
+
 class CAudioNode
 {
 public:
@@ -16,7 +18,12 @@ public:
     //! Get the sample period in seconds
     double GetSamplePeriod() { return m_samplePeriod; }
 
+    //! Set the sample rate
+    void SetSampleRate(double s) { m_sampleRate = s;  m_samplePeriod = 1 / s; }
+
     double GetBPM() { return m_bpm; }
+
+    void SetBPM(double x) { m_bpm = x; }
 
     //! Set the sample rate
     void SetSampleRate(double s, double bpm);

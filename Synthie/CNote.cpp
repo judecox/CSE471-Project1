@@ -3,8 +3,6 @@
 
 CNote::CNote(void)
 {
-    m_measure = 0;
-    m_beat = 0;
 }
 
 CNote::~CNote(void)
@@ -25,10 +23,10 @@ bool CNote::operator<(const CNote& b)
 }
 
 
-void CNote::XmlLoad(IXMLDOMNode* xml,
-    std::wstring instrument, double bpm)
+void CNote::XmlLoad(IXMLDOMNode* xml, std::wstring& instrument)
 {
-    // Remember the and the instrument.
+    // Remember the xml node and the instrument.
+    m_node = xml;
     m_instrument = instrument;
 
     // Get a list of all attribute nodes and the
@@ -37,7 +35,6 @@ void CNote::XmlLoad(IXMLDOMNode* xml,
     xml->get_attributes(&attributes);
     long len;
     attributes->get_length(&len);
-    double durationModifier = 60.0 / bpm;
 
     // Loop over the list of attributes
     for (int i = 0; i < len; i++)
@@ -67,15 +64,7 @@ void CNote::XmlLoad(IXMLDOMNode* xml,
             value.ChangeType(VT_R8);
             m_beat = value.dblVal - 1;
         }
-        else if (name == "duration")
-        {
-            // Same for duration.
-            value.ChangeType(VT_R8);
-            m_duration = value.dblVal * durationModifier;
-        }
-        else if (name == "note")
-        {
-            m_note = value.bstrVal;
-        }
+
     }
+
 }
