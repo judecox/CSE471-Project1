@@ -5,8 +5,10 @@
 #include <memory>
 
 #include "CToneInstrument.h"
+#include "CPiano.h"
 #include "xmlhelp.h"
 #include "CNoiseGate.h"
+#include "CCompressor.h"
 
 using namespace std;
 
@@ -96,6 +98,9 @@ bool CSynthesizer::Generate(double* frame)
 
 			m_instruments.push_back(instrument);
 		}
+
+		// ADD OTHER INSTRUMENTS HERE (I believe)
+
 
 		m_currentNote++;
 	}
@@ -408,6 +413,13 @@ void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
 		gate->XmlLoad(xml);
 
 		m_effects.push_back(gate);
+	}
+	else if (nodeName == L"compress")
+	{
+		CCompressor* compress = new CCompressor(m_channels);
+		compress->XmlLoad(xml);
+
+		m_effects.push_back(compress);
 	}
 }
 

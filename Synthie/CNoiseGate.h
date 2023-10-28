@@ -7,7 +7,7 @@ class CNoiseGate :
 {
 	// Enums
 public:
-	enum Stage
+	enum Phase
 	{
 		// No sound.
 		Closed,
@@ -26,7 +26,7 @@ public:
 
 	// Variables
 private:
-	std::vector<Stage> m_stages;
+	std::vector<Phase> m_phases;
 
 	std::vector<double> m_times;
 
@@ -51,6 +51,6 @@ public:
 	void Process(const double* frameIn, double* frameOut, const double& time) override;
 
 	// Inherited via CEffect
-	void XmlLoad(IXMLDOMNode* xml) override;
+	void XmlLoadAttribute(const CComBSTR & name, CComVariant & value) override;
 };
 
