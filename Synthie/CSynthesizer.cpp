@@ -99,9 +99,6 @@ bool CSynthesizer::Generate(double* frame)
 			m_instruments.push_back(instrument);
 		}
 
-		// ADD OTHER INSTRUMENTS HERE (I believe)
-
-
 		m_currentNote++;
 	}
 
