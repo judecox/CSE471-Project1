@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "CFlange.h"
+#include "CChorusEffect.h"
 #include <cmath>
 
-CFlange::CFlange(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod)
+CChorusEffect::CChorusEffect(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod)
 {
 	m_phase = 0;
 	m_frequency = 1;
@@ -11,18 +11,12 @@ CFlange::CFlange(int channels, double sampleRate, double samplePeriod) : CEffect
 	m_bufferIndex = 0;
 	m_bufferSize = std::ceil(m_channels * m_amplitude * m_sampleRate);
 
-	m_feedback = 0.5;
 	m_wetness = 0.5;
 
 	m_frameHistory = std::vector<double>(m_bufferSize);
 }
 
-CFlange::~CFlange()
-{
-
-}
-
-void CFlange::Process(const double* frameIn, double* frameOut, const double& time)
+void CChorusEffect::Process(const double* frameIn, double* frameOut, const double& time)
 {
 	// Calculate the delay due to rate and amount.
 	const int delayed = std::ceil(m_amplitude * sin(m_phase * 2 * PI) * m_sampleRate - m_amplitude);
@@ -44,9 +38,8 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 		output += m_frameHistory[i] * m_wetness;
 
 
-		// Feedback
-		m_frameHistory[m_bufferIndex] = output * m_feedback + 
-			frameIn[c] * (1 - m_feedback);
+		//// Feedback
+		//m_frameHistory[m_bufferIndex] = output * m_feedback;
 
 		// Next index
 		m_bufferIndex = std::fmod(++m_bufferIndex, m_bufferSize);
@@ -56,10 +49,10 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 	}
 }
 
-void CFlange::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value)
+void CChorusEffect::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value)
 {
-	// These parameters are based off of 
-	// https://blog.native-instruments.com/what-is-a-flanger/
+	// These parameters were optained from 
+	// https://www.youtube.com/watch?v=zmN7fK3fKUE
 	if (name == L"rate")
 	{
 		value.ChangeType(VT_R8);
@@ -75,14 +68,14 @@ void CFlange::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 		value.ChangeType(VT_R8);
 		m_phase = value.dblVal;
 	}
-	else if (name == L"feedback")
-	{
-		value.ChangeType(VT_R8);
-		m_feedback = value.dblVal;
-	}
 	else if (name == L"mix" || name == L"wetness")
 	{
 		value.ChangeType(VT_R8);
 		m_wetness = value.dblVal;
+	}
+	else if (name == L"offset")
+	{
+		value.ChangeType(VT_R8);
+		m_balanceOffset = value.dblVal;
 	}
 }
