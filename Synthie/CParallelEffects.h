@@ -5,7 +5,7 @@ class CParallelEffects :
 {
 	// Contructor & Destructor
 public:
-	CParallelEffects(int channels) : CEffectsGroup(channels) {}
+	CParallelEffects(int channels, double sampleRate, double samplePeriod) : CEffectsGroup(channels, sampleRate, samplePeriod) {}
 
 	// Public methods
 public:

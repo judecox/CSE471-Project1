@@ -8,7 +8,7 @@ class CSerialEffects :
 {
 	// Contructor & Destructor
 public:
-	CSerialEffects(int channels) : CEffectsGroup(channels) {}
+	CSerialEffects(int channels, double sampleRate, double samplePeriod) : CEffectsGroup(channels, sampleRate, samplePeriod) {}
 
 	// Public methods
 public:

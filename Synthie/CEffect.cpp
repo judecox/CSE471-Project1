@@ -1,6 +1,14 @@
 #include "pch.h"
 #include "CEffect.h"
 
+CEffect::CEffect(int channels, double sampleRate, double samplePeriod)
+{
+	m_channels = channels;
+	m_sampleRate = sampleRate;
+	m_samplePeriod = samplePeriod;
+	m_id = L"";
+}
+
 void CEffect::XmlLoad(IXMLDOMNode* xml)
 {
 	// Get a list of all attribute nodes and the

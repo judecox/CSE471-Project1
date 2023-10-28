@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CCompressor.h"
 
-CCompressor::CCompressor(int channels) : CEffect(channels)
+CCompressor::CCompressor(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod)
 {
 	m_currentVol = 0.0;
 	m_stages = std::vector<Phase>(m_channels, Hold);
@@ -19,15 +19,6 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 
 		const double delta = in - (inSign * m_threshold);
 		const double target = (inSign * m_threshold) + delta / m_ratio;
-
-		//if (inAmp > m_threshold)
-		//{
-		//	out = target;
-		//}
-		//else
-		//{
-		//	out = in;
-		//}
 
 		Phase phase = m_stages.at(c);
 

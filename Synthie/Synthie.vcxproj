@@ -136,6 +136,7 @@
     <ClCompile Include="CEffect.cpp" />
     <ClCompile Include="CEffectFactory.cpp" />
     <ClCompile Include="CEffectsGroup.cpp" />
+    <ClCompile Include="CFlange.cpp" />
     <ClCompile Include="CInstrument.cpp" />
     <ClCompile Include="CNoiseGate.cpp" />
     <ClCompile Include="CNote.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="CEffect.h" />
     <ClInclude Include="CEffectFactory.h" />
     <ClInclude Include="CEffectsGroup.h" />
+    <ClInclude Include="CFlange.h" />
     <ClInclude Include="CInstrument.h" />
     <ClInclude Include="CNoiseGate.h" />
     <ClInclude Include="CNote.h" />

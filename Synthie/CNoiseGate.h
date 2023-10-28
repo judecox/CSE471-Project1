@@ -45,7 +45,7 @@ private:
 	
 
 public:
-	CNoiseGate(int channels);
+	CNoiseGate(int channels, double sampleRate, double samplePeriod);
 
 	// Inherited via CEffect
 	void Process(const double* frameIn, double* frameOut, const double& time) override;

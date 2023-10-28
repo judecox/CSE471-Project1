@@ -424,7 +424,7 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 
 void CSynthesizer::XmlLoadEffectList(IXMLDOMNode* xml)
 {
-	CEffectFactory effFactory(m_channels);
+	CEffectFactory effFactory(m_channels, m_sampleRate, m_samplePeriod);
 	auto effects = effFactory.XmlLoadEffects(xml);
 	
 	for each (auto* eff in effects)

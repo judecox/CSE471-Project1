@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CNoiseGate.h"
 
-CNoiseGate::CNoiseGate(int channels) : CEffect(channels)
+CNoiseGate::CNoiseGate(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod)
 {
 	m_phases = std::vector<Phase>(m_channels, Open);
 	m_times = std::vector<double>(m_channels, 0);

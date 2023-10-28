@@ -21,7 +21,7 @@ public:
 	};
 	// Contructor & Methods
 public:
-	CCompressor(int channels);
+	CCompressor(int channels, double sampleRate, double samplePeriod);
 
 	// Inherited via CEffect
 	void Process(const double* frameIn, double* frameOut, const double& time) override;

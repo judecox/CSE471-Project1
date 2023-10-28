@@ -14,6 +14,6 @@ CEffectsGroup::~CEffectsGroup()
 
 void CEffectsGroup::XmlLoad(IXMLDOMNode* xml)
 {
-	CEffectFactory factory(m_channels);
+	CEffectFactory factory(m_channels, m_sampleRate, m_samplePeriod);
 	m_effects = factory.XmlLoadEffects(xml);
 }
