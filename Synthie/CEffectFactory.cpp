@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "CEffectFactory.h"
+#include "CSerialEffects.h"
+#include "CParallelEffects.h"
 #include "CNoiseGate.h"
 #include "CCompressor.h"
 #include "xmlhelp.h"
@@ -31,8 +33,21 @@ std::vector<CEffect*> CEffectFactory::XmlLoadEffects(IXMLDOMNode* xml)
 		CComBSTR nodeName;
 		node->get_nodeName(&nodeName);
 
+		if (nodeName == L"serial")
+		{
+			CSerialEffects* sEffs = new CSerialEffects(m_channels);
+			sEffs->XmlLoad(node);
 
-		if (nodeName == L"gate")
+			effects.push_back(sEffs);
+		}
+		else if (nodeName == L"parallel")
+		{
+			CParallelEffects* pEffs = new CParallelEffects(m_channels);
+			pEffs->XmlLoad(node);
+
+			effects.push_back(pEffs);
+		}
+		else if (nodeName == L"gate")
 		{
 			CNoiseGate* gate = new CNoiseGate(m_channels);
 			gate->XmlLoad(node);

@@ -1,14 +1,11 @@
 #pragma once
 #include "CEffectsGroup.h"
-#include <vector>
-
-// Plays effects in serial.
-class CSerialEffects :
-    public CEffectsGroup
+class CParallelEffects :
+	public CEffectsGroup
 {
 	// Contructor & Destructor
 public:
-	CSerialEffects(int channels) : CEffectsGroup(channels) {}
+	CParallelEffects(int channels) : CEffectsGroup(channels) {}
 
 	// Public methods
 public:

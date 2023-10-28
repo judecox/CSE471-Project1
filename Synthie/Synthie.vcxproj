@@ -139,6 +139,7 @@
     <ClCompile Include="CInstrument.cpp" />
     <ClCompile Include="CNoiseGate.cpp" />
     <ClCompile Include="CNote.cpp" />
+    <ClCompile Include="CParallelEffects.cpp" />
     <ClCompile Include="CPiano.cpp" />
     <ClCompile Include="CSerialEffects.cpp" />
     <ClCompile Include="CSineWave.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="CInstrument.h" />
     <ClInclude Include="CNoiseGate.h" />
     <ClInclude Include="CNote.h" />
+    <ClInclude Include="CParallelEffects.h" />
     <ClInclude Include="CPiano.h" />
     <ClInclude Include="CSerialEffects.h" />
     <ClInclude Include="CSineWave.h" />
