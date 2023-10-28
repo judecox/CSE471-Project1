@@ -7,6 +7,7 @@
 #include "CToneInstrument.h"
 #include "xmlhelp.h"
 #include "CNoiseGate.h"
+#include "CCompressor.h"
 
 using namespace std;
 
@@ -64,17 +65,33 @@ bool CSynthesizer::Generate(double* frame)
 		//
 
 		// Create the instrument object
-
-		if (note.Instrument() == L"ToneInstrument")
+		const std::wstring& instrName = note.Instrument();
+		if (instrName == L"ToneInstrument")
 		{
-			std::unique_ptr<CToneInstrument> instrument = std::make_unique<CToneInstrument>();
+			CToneInstrument* instrument = new CToneInstrument();
 
 			// Configure the instrument object
 			instrument->SetSampleRate(GetSampleRate(), m_bpm);
 			instrument->SetNote(&note);
 			instrument->Start();
 
-			m_instruments.push_back(instrument.release());
+			m_instruments.push_back(instrument);
+		}
+		else if (instrName == L"piano")
+		{
+			// TODO: Implement piano.
+		}
+		else if (instrName == L"recorded")
+		{
+			// TODO: Implement prerecorded synth.
+		}
+		else if (instrName == L"organ")
+		{
+			// TODO: Implement organ.
+		}
+		else if (instrName == L"wavetable")
+		{
+			// TODO: Implement wavetable.
 		}
 
 		m_currentNote++;
@@ -396,6 +413,13 @@ void CSynthesizer::XmlLoadEffect(IXMLDOMNode* xml)
 		gate->XmlLoad(xml);
 
 		m_effects.push_back(gate);
+	}
+	else if (nodeName == L"compress")
+	{
+		CCompressor* compress = new CCompressor(m_channels);
+		compress->XmlLoad(xml);
+
+		m_effects.push_back(compress);
 	}
 }
 

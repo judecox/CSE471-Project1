@@ -1,62 +1,33 @@
 #include "pch.h"
 #include "CNoiseGate.h"
 
-
 CNoiseGate::CNoiseGate(int channels) : CEffect(channels)
 {
-	m_stages = std::vector<Stage>(m_channels);
-	m_times = std::vector<double>(m_channels);
+	m_phases = std::vector<Phase>(m_channels, Open);
+	m_times = std::vector<double>(m_channels, 0);
 }
 
-void CNoiseGate::XmlLoad(IXMLDOMNode* xml)
+void CNoiseGate::XmlLoadAttribute(const CComBSTR & name, CComVariant & value)
 {
-	// Get a list of all attribute nodes and the
-	// length of that list
-	CComPtr<IXMLDOMNamedNodeMap> attributes;
-	xml->get_attributes(&attributes);
-	long len;
-	attributes->get_length(&len);
-
-	// Loop over the list of attributes
-	for (int i = 0; i < len; i++)
+	if (name == L"threshold")
 	{
-		// Get attribute i
-		CComPtr<IXMLDOMNode> attrib;
-		attributes->get_item(i, &attrib);
-
-		// Get the name of the attribute
-		CComBSTR name;
-		attrib->get_nodeName(&name);
-
-		// Get the value of the attribute.  A CComVariant is a variable
-		// that can have any type. It loads the attribute value as a
-		// string (UNICODE), but we can then change it to an integer 
-		// (VT_I4) or double (VT_R8) using the ChangeType function 
-		// and then read its integer or double value from a member variable.
-		CComVariant value;
-		attrib->get_nodeValue(&value);
-
-
-		if (name == L"threshold")
-		{
-			value.ChangeType(VT_R8);
-			m_threshold = value.dblVal;
-		}
-		else if (name == L"attack")
-		{
-			value.ChangeType(VT_R8);
-			m_attack = value.dblVal;
-		}
-		else if (name == L"hold")
-		{
-			value.ChangeType(VT_R8);
-			m_hold = value.dblVal;
-		}
-		else if (name == L"release")
-		{
-			value.ChangeType(VT_R8);
-			m_release = value.dblVal;
-		}
+		value.ChangeType(VT_R8);
+		m_threshold = value.dblVal;
+	}
+	else if (name == L"attack")
+	{
+		value.ChangeType(VT_R8);
+		m_attack = value.dblVal;
+	}
+	else if (name == L"hold")
+	{
+		value.ChangeType(VT_R8);
+		m_hold = value.dblVal;
+	}
+	else if (name == L"release")
+	{
+		value.ChangeType(VT_R8);
+		m_release = value.dblVal;
 	}
 }
 
@@ -64,87 +35,87 @@ void CNoiseGate::XmlLoad(IXMLDOMNode* xml)
 // Source: https://en.wikipedia.org/w/index.php?title=Noise_gate&oldid=1180959855#Controls_and_parameters
 void CNoiseGate::Process(const double* frameIn, double* frameOut, const double& time)
 {
-	for (int i = 0; i < m_channels; i++)
+	for (int c = 0; c < m_channels; c++)
 	{
-		switch (m_stages[i])
+		switch (m_phases.at(c))
 		{
 		case Closed:
 		{
-			frameOut[i] = 0;
-			if (frameIn[i] >= m_threshold)
+			frameOut[c] = 0;
+			if (frameIn[c] >= m_threshold)
 			{
 				// Move into attack. Use m_times to keep track of when
 				// we entered a stage.
-				m_stages[i] = Attack;
-				m_times[i] = time;
+				m_phases.at(c) = Attack;
+				m_times.at(c) = time;
 			}
 			break;
 		}
 		case Attack:
 		{
-			const double fAtk = (time - m_times[i]) / m_attack;
+			const double fAtk = (time - m_times.at(c)) / m_attack;
 
 			if (fAtk >= 1)
 			{
-				m_stages[i] = Open;
-				frameOut[i] = frameIn[i];
+				m_phases.at(c) = Open;
+				frameOut[c] = frameIn[c];
 			}
 			else
 			{
-				frameOut[i] = fAtk * frameIn[i];
+				frameOut[c] = fAtk * frameIn[c];
 			}
 			break;
 		}
 		case Open:
 		{
-			frameOut[i] = frameIn[i];
-			if (frameIn[i] < m_threshold)
+			frameOut[c] = frameIn[c];
+			if (frameIn[c] < m_threshold)
 			{
-				m_stages[i] = Hold;
-				m_times[i] = time;
+				m_phases.at(c) = Hold;
+				m_times.at(c) = time;
 			}
 			break;
 		}
 		case Hold:
 		{
-			if (frameIn[i] >= m_threshold)
+			if (frameIn[c] >= m_threshold)
 			{
 				// Back in threshold. Go back to open state.
-				frameOut[i] = frameIn[i];
-				m_stages[i] = Open;
+				frameOut[c] = frameIn[c];
+				m_phases.at(c) = Open;
 			}
 			else
 			{
-				frameOut[i] = frameIn[i];
+				frameOut[c] = frameIn[c];
 
-				if (time - m_times[i] >= m_hold)
+				if (time - m_times.at(c) >= m_hold)
 				{
-					m_stages[i] = Release;
-					m_times[i] = time;
+					m_phases.at(c) = Release;
+					m_times.at(c) = time;
 				}
 			}
 			break;
 		}
 		case Release:
 		{
-			if (frameIn[i] >= m_threshold)
+			if (frameIn[c] >= m_threshold)
 			{
 				// Back in threshold. Go back to open state.
-				frameOut[i] = frameIn[i];
-				m_stages[i] = Open;
+				frameOut[c] = frameIn[c];
+				m_phases.at(c) = Open;
 			}
 			else
 			{
-				const double fRls = (time - m_times[i]) / m_release;
+				const double fRls = (time - m_times.at(c)) / m_release;
 
 				if (fRls >= 1)
 				{
-					m_stages[i] = Closed;
-					frameOut[i] = 0;
+					m_phases.at(c) = Closed;
+					frameOut[c] = 0;
 				}
 				else
 				{
-					frameOut[i] = frameIn[i] * (1 - fRls);
+					frameOut[c] = frameIn[c] * (1 - fRls);
 				}
 			}
 			break;
