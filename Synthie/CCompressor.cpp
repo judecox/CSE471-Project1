@@ -13,10 +13,21 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 	for (int c = 0; c < m_channels; c++)
 	{
 		double in = frameIn[c];
+		double inAmp = abs(in);
+		const int inSign = signbit(in) ? -1 : 1;
 		double out = in;
 
-		double delta = (in - m_threshold) / m_ratio;
-		double target = in + delta;
+		const double delta = in - (inSign * m_threshold);
+		const double target = (inSign * m_threshold) + delta / m_ratio;
+
+		//if (inAmp > m_threshold)
+		//{
+		//	out = target;
+		//}
+		//else
+		//{
+		//	out = in;
+		//}
 
 		Phase phase = m_stages.at(c);
 
@@ -24,7 +35,7 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 		{
 		case Hold:
 		{
-			if (in < m_threshold)
+			if (inAmp < m_threshold)
 			{
 				// Input remains below threshold.
 				out = in;
@@ -32,6 +43,7 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 			else
 			{
 				// Above threshold. Enter attack phase.
+				out = in;
 				m_times.at(c) = time;
 				phase = Attack;
 			}
@@ -39,7 +51,7 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 		}
 		case Attack:
 		{
-			if (in < m_threshold)
+			if (inAmp < m_threshold)
 			{
 				// Input has fallen below threshold.
 				// Go to Release phase.
@@ -66,7 +78,7 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 		}
 		case Active:
 		{
-			if (in > m_threshold)
+			if (inAmp > m_threshold)
 			{
 				// Input remains above threshold.
 				out = target;
@@ -82,7 +94,7 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 		}
 		case Release:
 		{
-			if (in > m_threshold)
+			if (inAmp > m_threshold)
 			{
 				// Input is now above threshold.
 				// Go to Attack phase.
@@ -102,7 +114,7 @@ void CCompressor::Process(const double* frameIn, double* frameOut, const double&
 			else
 			{
 				// Release is done. Go into Hold phase.
-				out = target;
+				out = in;
 				phase = Hold;
 			}
 			break;
