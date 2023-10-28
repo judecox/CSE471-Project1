@@ -13,6 +13,8 @@ class CSynthesizer
 public:
 	CSynthesizer();
 
+	~CSynthesizer();
+
 	void Start(void);
 
 	bool Generate(double* frame);
@@ -71,13 +73,14 @@ private:
 
 	std::vector<CEffect*> m_effects;
 	std::list<CInstrument*>  m_instruments;
-	std::vector<CNote> m_notes;
+	std::vector<CNote*> m_notes;
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);
 	void XmlLoadEffectList(IXMLDOMNode* xml);
 	void XmlLoadEffect(IXMLDOMNode* xml);
-	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);	
+	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
+	void XmlLoadSend(IXMLDOMNode* xml, std::wstring& instrument);
 };
 
 #pragma comment(lib, "msxml2.lib")
