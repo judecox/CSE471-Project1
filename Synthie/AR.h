@@ -5,6 +5,8 @@ class CAR :
     public CAudioNode
 {
 public:
+	CAR();
+
 	//! Start audio generation
 	virtual void Start();
 
@@ -17,7 +19,14 @@ public:
 
 	double Duration() { return m_duration; }
 
-	CAR();
+	void SetAttack(double at) { m_attack = at; }
+
+	double Attack() { return m_attack; }
+
+	void SetRelease(double rl) { m_release = rl; }
+
+	double Release() { return m_release; }
+
 private:
 	double m_duration;
 	double m_time;
