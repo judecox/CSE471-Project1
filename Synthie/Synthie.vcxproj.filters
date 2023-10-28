@@ -72,9 +72,6 @@
     <ClCompile Include="CNote.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CARSineWave.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,6 +79,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPiano.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AR.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,9 +152,6 @@
     <ClInclude Include="CNote.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CARSineWave.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -162,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPiano.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,7 @@
 #pragma once
 #include "CInstrument.h"
-#include "CARSineWave.h"
+#include "AR.h"
+#include "CSineWave.h"
 //#include "CSample.h"
 
 #include <memory>
@@ -16,20 +17,19 @@ public:
 
 	void SetNote(CNote* note);
 
-	void SetFreq(double f) { m_sinewave->SetFreq(f); }
-	void SetAmplitude(double a) { m_sinewave->SetAmplitude(a); }
+	void SetFreq(double f) { m_sinewave.SetFreq(f); }
+	void SetAmplitude(double a) { m_sinewave.SetAmplitude(a); }
 
 	// below code is meant to interact with the CSample class, once/if it is implemented
 	/*
 		void SetSample(CSample* sample) { m_sample = sample; }
 		double Duration() { return m_sample->Duration(); }
 	*/
-	
-	double Duration() { return m_sinewave->Duration(); }
 
 private:
 	// std::unique_ptr<CSample> m_sample;
-	std::unique_ptr<CARSineWave> m_sinewave;
+	CSineWave   m_sinewave;
+	CAR m_ar;
 	double m_time;
 
 
