@@ -11,7 +11,7 @@ protected:
 
     // Constructor & Destructor
 public:
-    CEffectsGroup(int channels) : CEffect(channels) {}
+    CEffectsGroup(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod) {}
 
     ~CEffectsGroup();
 

@@ -99,7 +99,16 @@
     <ClCompile Include="CParallelEffects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CRecordedAudio.cpp">
+    <ClCompile Include="CFlange.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CChorusEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CWaveform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CWavetable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,7 +206,16 @@
     <ClInclude Include="CParallelEffects.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CRecordedAudio.h">
+    <ClInclude Include="CFlange.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CChorusEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CWaveform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CWavetable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
