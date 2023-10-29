@@ -183,7 +183,39 @@ bool CSynthesizer::Generate(double* frame)
 		node = next;
 	}
 
-	// Phase 3.1: Play Recorded Performance
+	//
+	// Phase 3.1: Applying Recording-Specific Effects
+	//
+	if (m_recorded_effects.size() > 0 && m_time >= m_recorded_effect_timestamps[0] && m_recorded_effects[0] != -1)
+	{
+		switch (m_recorded_effects[0])
+		{
+		case 0: //Set Amplitude
+			m_recorded.SetAmplitude(m_recorded_effect_parameters[0]);
+			break;
+		case 1: //Set Fuzz
+			m_recorded.SetFuzz(m_recorded_effect_parameters[0]);
+			break;
+		case 2: //Enable/Disable Reson (Value of 0.0 is disable, anything else is enable)
+			m_recorded.SetResonEnabled(m_recorded_effect_parameters[0]);
+			break;
+		case 3: //Set Reson Frequency
+			m_recorded.SetResonFrequency(m_recorded_effect_parameters[0]);
+			break;
+		case 4: //Set Reson Band
+			m_recorded.SetResonBand(m_recorded_effect_parameters[0]);
+			break;
+		default:
+			break;
+		}
+
+		//Clearing the first item in all vectors to prepare for the next one
+		m_recorded_effects.erase(m_recorded_effects.begin());
+		m_recorded_effect_timestamps.erase(m_recorded_effect_timestamps.begin());
+		m_recorded_effect_parameters.erase(m_recorded_effect_parameters.begin());
+	}
+
+	// Phase 3.2: Play Recorded Performance
 	if (m_time >= m_recorded_start_time && m_recorded.Generate())
 	{
 		// If we returned true, we have a valid sample.  Add it 
@@ -215,6 +247,8 @@ bool CSynthesizer::Generate(double* frame)
 		}
 	}
 	free(frameout);
+
+	
 
 	//
 	// Phase 4: Advance the time and beats
@@ -504,7 +538,7 @@ void CSynthesizer::XmlLoadRecording(IXMLDOMNode* xml)
 		CComBSTR name;
 		node->get_nodeName(&name);
 
-		if (name == L"recorded-effect")
+		if (name == L"effectrecorded")
 		{
 			XmlLoadRecordedEffect(node);
 		}
@@ -513,7 +547,61 @@ void CSynthesizer::XmlLoadRecording(IXMLDOMNode* xml)
 
 void CSynthesizer::XmlLoadRecordedEffect(IXMLDOMNode* xml)
 {
+	// Get a list of all attribute nodes and the
+	// length of that list
+	CComPtr<IXMLDOMNamedNodeMap> attributes;
+	xml->get_attributes(&attributes);
+	long len;
+	attributes->get_length(&len);
 
+	int recording_effect_type = -1;
+	double recording_effect_time = 0.0;
+	double recording_effect_parameter = -1.0;
+
+	// Loop over the list of attributes
+	for (int i = 0; i < len; i++)
+	{
+		// Get attribute i
+		CComPtr<IXMLDOMNode> attrib;
+		attributes->get_item(i, &attrib);
+
+		// Get the name of the attribute
+		CComBSTR name;
+		attrib->get_nodeName(&name);
+
+		// Get the value of the attribute.  
+		CComVariant value;
+		attrib->get_nodeValue(&value);
+
+		if (name == "measure")
+		{
+			// The file has measures that start at 1.  
+			// We'll make them start at zero instead.
+			value.ChangeType(VT_I4);
+			recording_effect_time += (value.intVal - 1) * (m_bpm / 60.0) * m_beatspermeasure;
+		}
+		else if (name == "beat")
+		{
+			// Same thing for the beats.
+			value.ChangeType(VT_R8);
+			recording_effect_time += (value.intVal - 1) * (m_bpm / 60.0);
+		}
+		else if (name == "effect")
+		{
+			value.ChangeType(VT_I4);
+			recording_effect_type = value.intVal;
+		}
+		else if (name == "parameter")
+		{
+			value.ChangeType(VT_R8);
+			recording_effect_parameter = value.dblVal;
+		}
+
+	}
+
+	m_recorded_effect_timestamps.push_back(recording_effect_time);
+	m_recorded_effects.push_back(recording_effect_type);
+	m_recorded_effect_parameters.push_back(recording_effect_parameter);
 }
 
 void CSynthesizer::AddEffect(CEffect* effect)

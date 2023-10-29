@@ -22,6 +22,7 @@ public:
     void SetResonFrequency(double freq) { m_reson_freq = freq; }
     void SetResonBand(double band) { m_reson_band = band; }
     void SetResonEnabled(bool enabled) { m_reson_enabled = enabled; }
+    void SetResonEnabled(double value) { m_reson_enabled = (value != 0.0); }
     
 private:
     int m_duration; //duration in frames
