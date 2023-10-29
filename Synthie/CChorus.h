@@ -11,6 +11,7 @@ private:
 	double m_phase;
 	double m_balanceOffset;
 	double m_wetness;
+	double m_delay;
 
 	std::vector<double> m_frameHistory;
 	int m_bufferIndex;
@@ -19,6 +20,8 @@ private:
 	// Contructors
 public:
 	CChorus(int channels, double sampleRate, double samplePeriod);
+
+	void ResetBuffer();
 
 	// Public methods
 public:

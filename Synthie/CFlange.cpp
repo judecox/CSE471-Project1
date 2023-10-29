@@ -24,8 +24,11 @@ CFlange::~CFlange()
 
 void CFlange::Process(const double* frameIn, double* frameOut, const double& time)
 {
-	// Calculate the delay due to rate and amount.
-	const int delayed = std::ceil(m_amplitude * sin(m_phase * 2 * PI) * m_sampleRate - m_amplitude);
+	// First calculate the waveform. This will be the waveform of the
+	// distortion in samples.
+	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
+
+	const int delayed = std::ceil(m_delay * m_sampleRate);
 	m_phase += m_frequency * m_samplePeriod;
 
 	// Use frameHistory as a circular buffer.
@@ -36,11 +39,12 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 
 		int i = std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
 
+		// Avoid underflow.
 		if (i < 0)
 			i += m_bufferSize;
 
 		// Set output, include wetness.
-		output = input * (1.0 - m_wetness);
+		output = input * waveform * (1.0 - m_wetness);
 		output += m_frameHistory[i] * m_wetness;
 
 
