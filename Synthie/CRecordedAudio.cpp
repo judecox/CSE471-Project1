@@ -54,8 +54,8 @@ bool CRecordedAudio::Generate()
 		audio[1] = 32767 * (-1.0 + m_fuzz);
 	}
 
-	audio[0] *= m_amplitude;
-	audio[1] *= m_amplitude;
+	//audio[0] *= m_amplitude;
+	//audio[1] *= m_amplitude;
 
 	if (m_reson_enabled)
 	{
@@ -116,11 +116,8 @@ bool CRecordedAudio::Generate()
 		yqueue[wrloc + 1] = audio[1];
 	}
 
-	m_frame[0] = (double)audio[0] / (double)32767; //Conversion between short and float
-	
-
-
-	m_frame[1] = (double)audio[1] / (double)32767;
+	m_frame[0] = m_amplitude * (double)audio[0] / (double)32767; //Conversion between short and float
+	m_frame[1] = m_amplitude * (double)audio[1] / (double)32767;
 	
 
 	//m_frame[0] *= m_amplitude;
