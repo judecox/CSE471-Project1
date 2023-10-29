@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "CChorusEffect.h"
+#include "CChorus.h"
 #include <cmath>
 
-CChorusEffect::CChorusEffect(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod)
+CChorus::CChorus(int channels, double sampleRate, double samplePeriod) : CEffect(channels, sampleRate, samplePeriod)
 {
 	m_phase = 0;
 	m_frequency = 1;
@@ -16,7 +16,7 @@ CChorusEffect::CChorusEffect(int channels, double sampleRate, double samplePerio
 	m_frameHistory = std::vector<double>(m_bufferSize);
 }
 
-void CChorusEffect::Process(const double* frameIn, double* frameOut, const double& time)
+void CChorus::Process(const double* frameIn, double* frameOut, const double& time)
 {
 	// Calculate the delay due to rate and amount.
 	const int delayed = std::ceil(m_amplitude * sin(m_phase * 2 * PI) * m_sampleRate - m_amplitude);
@@ -49,7 +49,7 @@ void CChorusEffect::Process(const double* frameIn, double* frameOut, const doubl
 	}
 }
 
-void CChorusEffect::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value)
+void CChorus::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value)
 {
 	// These parameters were optained from 
 	// https://www.youtube.com/watch?v=zmN7fK3fKUE

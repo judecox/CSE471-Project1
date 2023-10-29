@@ -5,6 +5,7 @@
 #include "CNoiseGate.h"
 #include "CCompressor.h"
 #include "CFlange.h"
+#include "CChorus.h"
 #include "xmlhelp.h"
 
 CEffectFactory::CEffectFactory(int channels, double sampleRate, double samplePeriod)
@@ -70,6 +71,13 @@ std::vector<CEffect*> CEffectFactory::XmlLoadEffects(IXMLDOMNode* xml)
 			flange->XmlLoad(node);
 
 			effects.push_back(flange);
+		}
+		else if (nodeName == L"chorus" || nodeName == L"choir")
+		{
+			CChorus* choir = new CChorus(m_channels, m_sampleRate, m_samplePeriod);
+			choir->XmlLoad(node);
+
+			effects.push_back(choir);
 		}
 	}
 

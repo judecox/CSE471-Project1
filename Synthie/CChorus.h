@@ -1,7 +1,7 @@
 #pragma once
 #include "CEffect.h"
 #include <vector>
-class CChorusEffect :
+class CChorus :
     public CEffect
 {
 	// Member variables
@@ -18,7 +18,7 @@ private:
 
 	// Contructors
 public:
-	CChorusEffect(int channels, double sampleRate, double samplePeriod);
+	CChorus(int channels, double sampleRate, double samplePeriod);
 
 	// Public methods
 public:
