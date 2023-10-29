@@ -44,6 +44,7 @@ public:
 	double GetTime() { return m_time; }
 
 	bool LoadRecordedSound(CRecordedAudio &source);
+	bool LoadRecordedSound(CRecordedAudio& source, CString path);
 
 private:
 	int m_channels;
@@ -88,6 +89,8 @@ private:
 	void AddEffect(CEffect* effect);
 	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
 	void XmlLoadSend(IXMLDOMNode* xml, std::wstring& instrument);
+	void XmlLoadRecording(IXMLDOMNode* xml);
+	void XmlLoadRecordedEffect(IXMLDOMNode* xml);
 };
 
 #pragma comment(lib, "msxml2.lib")

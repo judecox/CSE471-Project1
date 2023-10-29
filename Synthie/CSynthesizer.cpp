@@ -63,7 +63,7 @@ void CSynthesizer::Start(void)
 	m_time = 0;
 	m_recorded.Start();
 
-	LoadRecordedSound(m_recorded);
+	//LoadRecordedSound(m_recorded);
 }
 
 //! Generate one audio frame
@@ -381,6 +381,10 @@ void CSynthesizer::XmlLoadScore(IXMLDOMNode* xml)
 		{
 			XmlLoadEffectList(node);
 		}
+		else if (name == "recording")
+		{
+			XmlLoadRecording(node);
+		}
 	}
 }
 
@@ -447,6 +451,58 @@ void CSynthesizer::XmlLoadEffectList(IXMLDOMNode* xml)
 	}
 }
 
+void CSynthesizer::XmlLoadRecording(IXMLDOMNode* xml)
+{
+	wstring instrument = L"";
+
+	// Get a list of all attribute nodes and the
+	// length of that list
+	CComPtr<IXMLDOMNamedNodeMap> attributes;
+	xml->get_attributes(&attributes);
+	long len;
+	attributes->get_length(&len);
+
+	// Loop over the list of attributes
+	for (int i = 0; i < len; i++)
+	{
+		// Get attribute i
+		CComPtr<IXMLDOMNode> attrib;
+		attributes->get_item(i, &attrib);
+
+		// Get the name of the attribute
+		CComBSTR name;
+		attrib->get_nodeName(&name);
+
+		// Get the value of the attribute.  
+		CComVariant value;
+		attrib->get_nodeValue(&value);
+		
+		if (name == L"filename")
+		{
+			LoadRecordedSound(m_recorded, value.bstrVal);
+		}
+	}
+
+	CComPtr<IXMLDOMNode> node;
+	xml->get_firstChild(&node);
+	for (; node != NULL; NextNode(node))
+	{
+		// Get the name of the node
+		CComBSTR name;
+		node->get_nodeName(&name);
+
+		if (name == L"recorded-effect")
+		{
+			XmlLoadRecordedEffect(node);
+		}
+	}
+}
+
+void CSynthesizer::XmlLoadRecordedEffect(IXMLDOMNode* xml)
+{
+
+}
+
 void CSynthesizer::AddEffect(CEffect* effect)
 {
 	m_effects.push_back(effect);
@@ -474,6 +530,17 @@ bool CSynthesizer::LoadRecordedSound(CRecordedAudio &source)
 		return false;
 
 	if (!source.m_wavein.Open(dlg.GetPathName()))
+		return FALSE;
+
+	m_sampleRate = source.m_wavein.SampleRate();
+	m_channels = source.m_wavein.NumChannels();
+
+	return TRUE;
+}
+
+bool CSynthesizer::LoadRecordedSound(CRecordedAudio& source, CString path)
+{
+	if (!source.m_wavein.Open(path))
 		return FALSE;
 
 	m_sampleRate = source.m_wavein.SampleRate();
