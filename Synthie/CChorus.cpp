@@ -27,7 +27,7 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 	// distortion in samples.
 	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
 
-	const int delayed = std::ceil(m_delay * m_sampleRate);
+	const int delayed = std::ceil((m_delay + m_amplitude) * m_sampleRate);
 	m_phase += m_frequency * m_samplePeriod;
 
 	// Use frameHistory as a circular buffer.
