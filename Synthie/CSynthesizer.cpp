@@ -184,7 +184,7 @@ bool CSynthesizer::Generate(double* frame)
 	}
 
 	// Phase 3.1: Play Recorded Performance
-	if (m_recorded.Generate())
+	if (m_time >= m_recorded_start_time && m_recorded.Generate())
 	{
 		// If we returned true, we have a valid sample.  Add it 
 		// to the frame.
@@ -480,6 +480,19 @@ void CSynthesizer::XmlLoadRecording(IXMLDOMNode* xml)
 		if (name == L"filename")
 		{
 			LoadRecordedSound(m_recorded, value.bstrVal);
+		}
+		else if (name == "measure")
+		{
+			// The file has measures that start at 1.  
+			// We'll make them start at zero instead.
+			value.ChangeType(VT_I4);
+			m_recorded_start_time += (value.intVal - 1) * (m_bpm / 60.0) * m_beatspermeasure;
+		}
+		else if (name == "beat")
+		{
+			// Same thing for the beats.
+			value.ChangeType(VT_R8);
+			m_recorded_start_time += (value.dblVal - 1) * (m_bpm / 60.0);
 		}
 	}
 

@@ -82,6 +82,7 @@ private:
 	std::vector<CNote*> m_notes;
 
 	CRecordedAudio m_recorded;
+	double m_recorded_start_time = 0.0;
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);
