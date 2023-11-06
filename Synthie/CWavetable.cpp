@@ -1,10 +1,13 @@
 #include "pch.h"
 #include "CWavetable.h"
 #include "Notes.h"
+#include <string>
+
+using namespace std;
 
 CWavetable::CWavetable()
 {
-    m_duration = 0.1;
+    // m_duration = 0.1;
 }
 
 void CWavetable::Start()
@@ -19,8 +22,8 @@ void CWavetable::Start()
     m_ar.SetSampleRate(GetSampleRate());
 
     // Chnage the AR object's parameters
-    m_ar.SetAttack(0.01);
-    m_ar.SetRelease(0.03);
+    m_ar.SetAttack(m_waveform.Attack());
+    m_ar.SetRelease(m_waveform.Release());
     
     // Start the AR object
     m_ar.Start();
@@ -38,15 +41,7 @@ bool CWavetable::Generate()
 
     // Update time
     m_time += GetSamplePeriod();
-
-    // Loop waveform if duration is not yet reached
-    /*
-    if ((m_time < (m_duration - m_ar.Release())) &&
-        (m_waveform.Time() >= (m_ar.Duration() - m_ar.Release())))
-    {
-        m_waveform.SetTime(m_ar.Attack());
-    }
-    */
+    // m_ar.SetTime(m_waveform.Time());
 
     // We return true until the time reaches the duration.
     return valid;
@@ -72,7 +67,7 @@ void CWavetable::SetNote(CNote* note)
         CComBSTR name;
         attrib->get_nodeName(&name);
 
-        // Get the value of the attribute.  A CComVariant is a variable
+        // Get the value of the attribute. A CComVariant is a variable
         // that can have any type. It loads the attribute value as a
         // string (UNICODE), but we can then change it to an integer 
         // (VT_I4) or double (VT_R8) using the ChangeType function 
@@ -84,10 +79,13 @@ void CWavetable::SetNote(CNote* note)
         {
             value.ChangeType(VT_R8);
             SetDuration((value.dblVal) * (60.0 / m_bpm));
+            m_waveform.SetDuration((value.dblVal) * (60.0 / m_bpm));
         }
         else if (name == "note")
         {
-            SetFreq(NoteToFrequency(value.bstrVal));
+            // SetFreq(NoteToFrequency(value.bstrVal));
+            wstring noteName(value.bstrVal, SysStringLen(value.bstrVal));
+            m_waveform.LoadSampleIntoTable(noteName);
         }
 
     }
