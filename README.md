@@ -1,11 +1,9 @@
 # [Title of Selection Here]
 [Placeholder audio. Replace.]
 
-<audio controls src="./AudioFiles/t005b.wav">
-    <a href="./AudioFiles/t005b.wav">
-        Score
-    </a>
-</audio>
+
+https://github.com/judecox/CSE471-Project1/assets/61844345/bd83dfd8-ac40-4593-8528-f89ee76ccd73
+
 
 ## Group Members
 * Alex Charney
