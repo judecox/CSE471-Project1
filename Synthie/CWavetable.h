@@ -12,13 +12,12 @@ public:
 
 	void SetNote(CNote* note);
 
-	void SetFreq(double f) { m_waveform.SetFreq(f); }
+	// void SetFreq(double f) { m_waveform.SetFreq(f); }
 
-	// Leftover from CToneInstrument
 	// void SetAmplitude(double a) { m_waveform.SetAmplitude(a); }
 
 private:
 	CWaveform m_waveform;
-	double m_duration;
+	// double m_duration;
 	double m_time;
 };

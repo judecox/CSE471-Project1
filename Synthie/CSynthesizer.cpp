@@ -173,8 +173,8 @@ bool CSynthesizer::Generate(double* frame)
 		}
 		else
 		{
-			// If we returned false, the instrument is done.  Remove it
-			// from the list and delete it from memory.
+			// If we returned false, the instrument is done.
+			// Remove it from the list and delete it from memory.
 			m_instruments.erase(node);
 			delete instrument;
 		}

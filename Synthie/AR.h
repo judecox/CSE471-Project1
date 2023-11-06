@@ -27,6 +27,10 @@ public:
 
 	double Release() { return m_release; }
 
+	// void SetTime(double t) { m_time = t; }
+
+	// double Time() { return m_time; }
+
 private:
 	double m_duration;
 	double m_time;
