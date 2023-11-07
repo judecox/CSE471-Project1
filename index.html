@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="styles/styles.css">
+        <title>[Title of Selection Here]</title>
+    </head>
+    <body>
+        <header class="main-header">
+            <h1>[Title of Selection Here]</h1>
+        </header>
+        <div class="main-content">
+            <nav>
+                <article>
+                    <h2>Site Navigation</h2>
+                    [Links to the component pages here. Example:]
+                    <ul>
+                        <li><a href="index.html">Index</a></li>
+                        <li><a href="projects.html">Wavetable</a></li>
+                        <li><a href="contact.html">Effects</a></li>
+                    </ul>
+                </article>
+            </nav>
+            <div class="header-body">
+                <article>
+                    <h1>Project Information</h1>
+                    <h2>Score File</h2>
+                    <p>
+                        To store and load scores, we utilized XML to store the
+                        individual notes and effects within our score. Each note
+                        is tied to one instrument, and each instrument may be
+                        tied to one or more effects. We also allow any mixture
+                        of parallel or serial effects.
+                    </p>
+                    <p>
+                        The score file for [Title of Selection Here] is shown
+                        below for reference.
+                    </p>
+                    <pre class="code">
+&lt;!--NOT ACTUAL SCORE FILE! EXAMPLE ONLY! NEED REPLACEMENT!--&gt;
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;score bpm="120" beatspermeasure="2"&gt;
+	&lt;effects&gt;
+		&lt;compress id="test002" ratio="1" threshold="0.05" attack="0" release="0" /&gt;
+	&lt;/effects&gt;
+	&lt;instrument instrument="ToneInstrument"&gt;
+		&lt;note measure="1" beat="2" duration="0.33" note="F4" /&gt;
+		&lt;note measure="1" beat="2.33" duration="0.33" note="G4" /&gt;
+		&lt;note measure="1" beat="2.6" duration="0.33" note="A4" /&gt;
+
+		&lt;note measure="2" beat="1" duration="0.5" note="Bb4" /&gt;
+		&lt;note measure="2" beat="1" duration="0.5" note="G4" /&gt;
+		&lt;note measure="2" beat="1" duration="0.5" note="Eb4" /&gt;
+
+		&lt;note measure="3" beat="1" duration="0.5" note="Bb4" /&gt;
+		&lt;note measure="3" beat="1" duration="0.5" note="G4" /&gt;
+		&lt;note measure="3" beat="1" duration="0.5" note="Eb4" /&gt;
+
+		&lt;note measure="4" beat="1" duration="0.5" note="Bb4" /&gt;
+		&lt;note measure="4" beat="1" duration="0.5" note="D4" /&gt;
+		&lt;note measure="4" beat="1" duration="0.5" note="F4" /&gt;
+
+		&lt;note measure="4" beat="2" duration="0.5" note="Bb4" /&gt;
+		&lt;note measure="4" beat="2" duration="0.5" note="G4" /&gt;
+		&lt;note measure="4" beat="2" duration="0.5" note="Eb4" /&gt;
+
+		&lt;note measure="5" beat="1" duration="0.5" note="Bb4" /&gt;
+		&lt;note measure="5" beat="1" duration="0.5" note="D4" /&gt;
+		&lt;note measure="5" beat="1" duration="0.5" note="F4" /&gt;
+
+		&lt;note measure="6" beat="1" duration="0.5" note="G4" /&gt;
+		&lt;note measure="6" beat="1.5" duration="0.5" note="F#4" /&gt;
+		&lt;note measure="6" beat="2" duration="0.5" note="G4" /&gt;
+		&lt;note measure="6" beat="2.5" duration="0.5" note="G#4" /&gt;
+
+		&lt;note measure="7" beat="1" duration="1" note="A4" /&gt;
+		&lt;note measure="7" beat="2" duration="1" note="F4" /&gt;
+
+		&lt;note measure="8" beat="1" duration="3" note="Bb4" /&gt;
+		&lt;note measure="8" beat="1" duration="3" note="F4" /&gt;
+		&lt;note measure="8" beat="1" duration="3" note="D4" /&gt;
+	&lt;/instrument&gt;
+&lt;/score&gt;
+&lt;!--NOT ACTUAL SCORE FILE! EXAMPLE ONLY! NEED REPLACEMENT!--&gt;
+                    </pre>
+                </article>
+            </div>
+        </div>
+    </body>
+</html>
