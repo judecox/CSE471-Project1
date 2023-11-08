@@ -17,7 +17,7 @@ CChorus::CChorus(int channels, double sampleRate, double samplePeriod) : CEffect
 void CChorus::ResetBuffer()
 {
 	m_bufferIndex = 0;
-	m_bufferSize = std::ceil(m_channels * (m_amplitude + m_delay) * m_sampleRate);
+	m_bufferSize = (int)std::ceil(m_channels * (m_amplitude + m_delay) * m_sampleRate);
 	m_frameHistory = std::vector<double>(m_bufferSize);
 }
 
@@ -27,7 +27,7 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 	// distortion in samples.
 	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
 
-	const int delayed = std::ceil((m_delay + m_amplitude) * m_sampleRate);
+	const int delayed = (int)std::ceil((m_delay + m_amplitude) * m_sampleRate);
 	m_phase += m_frequency * m_samplePeriod;
 
 	// Use frameHistory as a circular buffer.
@@ -36,7 +36,7 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 		const double input = frameIn[c];
 		double output = frameOut[c];
 
-		int i = std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
+		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
 
 		// Avoid underflow.
 		if (i < 0)
@@ -50,7 +50,7 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 		m_frameHistory[m_bufferIndex] = input;
 
 		// Next index
-		m_bufferIndex = std::fmod(++m_bufferIndex, m_bufferSize);
+		m_bufferIndex = (int)std::fmod(++m_bufferIndex, m_bufferSize);
 
 		// Write output
 		frameOut[c] = output;
