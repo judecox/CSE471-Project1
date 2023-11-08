@@ -1,4 +1,4 @@
-#include "CInstrument.h"
+#include <string>
 
 #pragma once
 class CEffect
