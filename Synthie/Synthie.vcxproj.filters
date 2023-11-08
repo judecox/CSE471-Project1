@@ -102,13 +102,22 @@
     <ClCompile Include="CFlange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CChorusEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CWaveform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CWavetable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CChorus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CRecordedAudio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Organ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OrganWave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -209,13 +218,22 @@
     <ClInclude Include="CFlange.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CChorusEffect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CWaveform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CWavetable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CChorus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CRecordedAudio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Organ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OrganWave.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

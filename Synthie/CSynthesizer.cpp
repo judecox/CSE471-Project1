@@ -11,6 +11,7 @@
 #include "CNoiseGate.h"
 #include "CCompressor.h"
 #include "CWavetable.h"
+#include "Organ.h"
 
 using namespace std;
 
@@ -105,13 +106,9 @@ bool CSynthesizer::Generate(double* frame)
 		{
 			instrument = new CPiano();
 		}
-		else if (instrName == L"recorded")
-		{
-			// instrument = new prerecorded synth.
-		}
 		else if (instrName == L"organ")
 		{
-			// instrument = new organ.
+			instrument = new COrgan();
 		}
 		else if (instrName == L"wavetable")
 		{
