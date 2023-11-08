@@ -52,6 +52,7 @@ private:
     double m_loopStart = 0.055;
     double m_loopEnd = 0.1;
     int m_noteToPlay;
+    int frameIndex = 0;
 
     // List of notes
     std::vector<std::wstring> m_noteList { L"C", L"Db", L"D", L"Eb", L"E", L"F", L"Gb", L"G", L"Ab", L"A", L"Bb", L"B" };
