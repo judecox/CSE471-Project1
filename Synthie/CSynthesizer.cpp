@@ -520,13 +520,13 @@ void CSynthesizer::XmlLoadRecording(IXMLDOMNode* xml)
 			// The file has measures that start at 1.  
 			// We'll make them start at zero instead.
 			value.ChangeType(VT_I4);
-			m_recorded_start_time += (value.intVal - 1) * (m_bpm / 60.0) * m_beatspermeasure;
+			m_recorded_start_time += (value.intVal - 1) * (60.0 / m_bpm) * m_beatspermeasure;
 		}
 		else if (name == "beat")
 		{
 			// Same thing for the beats.
 			value.ChangeType(VT_R8);
-			m_recorded_start_time += (value.dblVal - 1) * (m_bpm / 60.0);
+			m_recorded_start_time += (value.dblVal - 1) * (60.0 / m_bpm);
 		}
 	}
 
@@ -578,13 +578,13 @@ void CSynthesizer::XmlLoadRecordedEffect(IXMLDOMNode* xml)
 			// The file has measures that start at 1.  
 			// We'll make them start at zero instead.
 			value.ChangeType(VT_I4);
-			recording_effect_time += (value.intVal - 1) * (m_bpm / 60.0) * m_beatspermeasure;
+			recording_effect_time += (value.intVal - 1) * (60.0 / m_bpm) * m_beatspermeasure;
 		}
 		else if (name == "beat")
 		{
 			// Same thing for the beats.
 			value.ChangeType(VT_R8);
-			recording_effect_time += (value.intVal - 1) * (m_bpm / 60.0);
+			recording_effect_time += (value.dblVal - 1) * (60.0 / m_bpm);
 		}
 		else if (name == "effect")
 		{
