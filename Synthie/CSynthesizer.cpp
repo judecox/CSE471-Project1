@@ -401,7 +401,7 @@ void CSynthesizer::XmlLoadScore(IXMLDOMNode* xml)
 		{
 			value.ChangeType(VT_R8);
 			m_bpm = value.dblVal;
-			m_secperbeat = 1 / (m_bpm / 60);
+			m_secperbeat = 1 / (m_bpm / 60.0);
 		}
 		else if (name == L"beatspermeasure")
 		{

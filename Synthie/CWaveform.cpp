@@ -93,19 +93,19 @@ int CWaveform::GetSampleIdFromNote(std::wstring note)
 void CWaveform::Start()
 {
 	m_time = 0;
-	m_amp = 0.1;
+	m_amp = 0.5;
 }
 
 bool CWaveform::Generate()
 {
 	// Use base function to start generate.
-	int const i = frameIndex % m_LookupTable[m_noteToPlay].size(); //int const i = int(m_time / GetSamplePeriod()) % m_LookupTable[m_noteToPlay].size();
+	//int const i = int(m_time / GetSamplePeriod()) % m_LookupTable[m_noteToPlay].size();
+	int const i = m_frameIndex % m_LookupTable[m_noteToPlay].size();
 	m_frame[0] = double(m_LookupTable[m_noteToPlay][i]) / 65535.0;
 	m_frame[0] *= m_amp;
 	m_frame[1] = m_frame[0];
 
-
-	frameIndex++;
+	m_frameIndex++;
 
 	m_time += GetSamplePeriod();
 
@@ -115,6 +115,7 @@ bool CWaveform::Generate()
 	if ((m_time < (m_duration - Release())) && (m_time >= LoopEnd()))
 	{
 		m_time = LoopStart();
+		m_frameIndex = int(LoopStart() / GetSamplePeriod());
 	}
 
 	return true;
