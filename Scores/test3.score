@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="60" beatspermeasure="4">
+	<effects>
+	  <parallel id="choirMultiVoice01">
+	    <choir id="choir01" delay="0.1" rate="1" amount="0.5" mix="0.5"/>
+	    <choir id="choir02" phase="0.5" delay="0.1" rate="1" amount="0.5" mix="0.5"/>
+	  </parallel>
+	</effects>
+  <instrument instrument="ToneInstrument">
+    <note measure="1" beat="1" duration="15" note="C4"/>
+  </instrument>
+</score>
