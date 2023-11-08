@@ -2,7 +2,6 @@
 #include "CAudioNode.h"
 #include "CNote.h"
 #include "AR.h"
-#include "CEffect.h"
 #include <vector>
 
 class CInstrument :
@@ -15,7 +14,7 @@ public:
 
 	double Duration() { return m_ar.Duration(); }
 
-	CEffect* m_effect;
+	std::wstring m_effectID = std::wstring();
 
 protected:
 	CAR m_ar;

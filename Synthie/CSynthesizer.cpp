@@ -129,7 +129,7 @@ bool CSynthesizer::Generate(double* frame)
 			if (effectID.length() > 0)
 			{
 				// Add effect sends.
-				instrument->m_effect = m_effectCatalog[effectID];
+				instrument->m_effectID = effectID;
 			}
 
 			m_instruments.push_back(instrument);
@@ -179,10 +179,10 @@ bool CSynthesizer::Generate(double* frame)
 			}
 
 			// Do effects.
-			if (instrument->m_effect != nullptr)
+			if (instrument->m_effectID.length() > 0)
 			{
 				double* frameout = (double*)calloc(m_channels, sizeof(double));
-				instrument->m_effect->Process(frame, frameout, m_time);
+				m_effectCatalog[instrument->m_effectID]->Process(frame, frameout, m_time);
 
 				std::copy(frameout, frameout + m_channels, frame);
 				free(frameout);

@@ -3,6 +3,19 @@ Component created by Ryan Chang
 
 ## Components
 ### Noise Gate
+A noise gate reduces audible noise in the signal by essencially muting the
+signal once it falls below a certain point. This can reduce the buzz from
+electronic audio equiptment, for example.
+
+Our noise gate features attack, open, and release stages, to allow for
+maximal control over the effect, and to avoid the click that can be produced
+when suddenly muting the signal.
+
+The effect can be controlled via the threshold, attack, hold, and release
+parameters defined as attributes on the noise gate's XML tag. The threshold
+controls the volumn at which the noise gate starts to close. The other
+parameters control the duration, in seconds, of the attack, open, and release
+stages.
 
 ### Compression/Limiting
 
