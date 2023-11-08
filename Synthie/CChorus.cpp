@@ -43,8 +43,8 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 			i += m_bufferSize;
 
 		// Set output, include wetness.
-		output = input * waveform * (1.0 - m_wetness);
-		output += m_frameHistory[i] * m_wetness;
+		output = input * (1.0 - m_wetness);
+		output += m_frameHistory[i] * waveform * m_wetness;
 
 		// Delayed signal
 		m_frameHistory[m_bufferIndex] = input;
