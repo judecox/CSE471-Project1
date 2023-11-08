@@ -125,6 +125,13 @@ bool CSynthesizer::Generate(double* frame)
 			instrument->SetNote(&note);
 			instrument->Start();
 
+			const std::wstring effectID = note.EffectID();
+			if (effectID.length() > 0)
+			{
+				// Add effect sends.
+				instrument->m_effect = m_effectCatalog[effectID];
+			}
+
 			m_instruments.push_back(instrument);
 		}
 
@@ -169,6 +176,16 @@ bool CSynthesizer::Generate(double* frame)
 			for (int c = 0; c < GetNumChannels(); c++)
 			{
 				frame[c] += instrument->Frame(c);
+			}
+
+			// Do effects.
+			if (instrument->m_effect != nullptr)
+			{
+				double* frameout = (double*)calloc(m_channels, sizeof(double));
+				instrument->m_effect->Process(frame, frameout, m_time);
+
+				std::copy(frameout, frameout + m_channels, frame);
+				free(frameout);
 			}
 		}
 		else
@@ -232,22 +249,21 @@ bool CSynthesizer::Generate(double* frame)
 	}
 
 	//
-	// Phase 3.5: Effects
+	// Phase 3.5: Overlay Effects
 	//
-	double* frameout = (double*)calloc(m_channels, sizeof(double));
-	for each (CEffect* effect in m_effects)
-	{
-		// Process the frame. Make sure to use two different arrays to avoid
-		// funny C++ activity.
-		effect->Process(frame, frameout, m_time);
-		
-		for (int c = 0; c < m_channels; c++)
-		{
-			frame[c] = frameout[c];
-		}
-	}
-	free(frameout);
-
+	//double* frameout = (double*)calloc(m_channels, sizeof(double));
+	//for each (CEffect* effect in m_effects)
+	//{
+	//	// Process the frame. Make sure to use two different arrays to avoid
+	//	// funny C++ activity.
+	//	effect->Process(frame, frameout, m_time);
+	//	
+	//	for (int c = 0; c < m_channels; c++)
+	//	{
+	//		frame[c] = frameout[c];
+	//	}
+	//}
+	//free(frameout);
 	
 
 	//
@@ -467,10 +483,6 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 		{
 			XmlLoadNote(node, instrument);
 		}
-		else if (name == L"sendEffect")
-		{
-			XmlLoadSend(node, instrument);
-		}
 	}
 }
 
@@ -615,11 +627,6 @@ void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)
 	CNote* note = new CNote();
 	note->XmlLoad(xml, instrument);
 	m_notes.push_back(note);
-}
-
-void CSynthesizer::XmlLoadSend(IXMLDOMNode* xml, std::wstring& instrument)
-{
-
 }
 
 bool CSynthesizer::LoadRecordedSound(CRecordedAudio &source)
