@@ -26,8 +26,6 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 {
 	// First calculate the waveform. This will be the waveform of the
 	// distortion in samples.
-	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
-
 	const int delayed = (int)std::ceil(m_channels * m_delay * m_sampleRate);
 	m_phase += m_frequency * m_samplePeriod;
 
@@ -48,6 +46,7 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 			i += m_bufferSize;
 
 		// Set output, include wetness.
+		const double waveform = m_amplitude * sin((m_phase - c * m_balanceOffset) * 2 * PI);
 		double output = input * (1.0 - m_wetness);
 		output += m_frameHistory[i] * waveform * m_wetness;
 
@@ -83,6 +82,11 @@ void CChorus::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 	{
 		value.ChangeType(VT_R8);
 		m_phase = value.dblVal;
+	}
+	else if (name == L"channelOffset" || name == L"offset")
+	{
+		value.ChangeType(VT_R8);
+		m_balanceOffset = value.dblVal;
 	}
 	else if (name == L"mix" || name == L"wetness")
 	{
