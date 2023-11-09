@@ -17,7 +17,7 @@ CChorus::CChorus(int channels, double sampleRate, double samplePeriod) : CEffect
 void CChorus::ResetBuffer()
 {
 	m_bufferIndex = 0;
-	m_bufferSize = (int)std::ceil(m_channels * m_delay * m_sampleRate);
+	m_bufferSize = (int)std::ceil((m_channels + 1) * m_delay * m_sampleRate);
 	m_frameHistory = std::vector<double>(m_bufferSize);
 	std::fill(m_frameHistory.begin(), m_frameHistory.end(), 0);
 }
