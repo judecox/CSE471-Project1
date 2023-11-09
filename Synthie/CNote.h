@@ -9,7 +9,7 @@ public:
 
     bool operator<(const CNote& b);
 
-    void XmlLoad(IXMLDOMNode* xml, std::wstring& instrument);
+    void XmlLoad(IXMLDOMNode* xml, std::wstring& instrument, std::wstring & effect);
     IXMLDOMNode* Node() { return m_node; }
 
     int Measure() const { return m_measure; }
