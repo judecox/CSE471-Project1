@@ -35,7 +35,7 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 	for (int c = 0; c < m_channels; c++)
 	{
 		const double input = frameIn[c];
-		double output = frameOut[c];
+		double output = 0;
 
 		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
 

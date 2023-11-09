@@ -35,7 +35,17 @@ public:
 	double GetSamplePeriod() { return m_samplePeriod; }
 
 	//! Set the number of channels
-	void SetNumChannels(int n) { m_channels = n; }
+	void SetNumChannels(int n)
+	{
+		if (frameout != nullptr)
+		{
+			free(frameout);
+			frameout = nullptr;
+		}
+
+		m_channels = n;
+		frameout = (double*)calloc(m_channels, sizeof(double));
+	}
 
 	//! Set the sample rate
 	void SetSampleRate(double s) { m_sampleRate = s;  m_samplePeriod = 1.0 / s; }
@@ -43,7 +53,7 @@ public:
 	//! Get the time since we started generating audio
 	double GetTime() { return m_time; }
 
-	bool LoadRecordedSound(CRecordedAudio &source);
+	bool LoadRecordedSound(CRecordedAudio& source);
 	bool LoadRecordedSound(CRecordedAudio& source, CString path);
 
 private:
@@ -75,6 +85,10 @@ private:
 	/// The current beat within the measure
 	/// </summary>
 	double m_beat;
+	/// <summary>
+	/// Buffer for the effects
+	/// </summary>
+	double* frameout;
 
 	std::vector<CEffect*> m_effects;
 	std::map<std::wstring, CEffect*> m_effectCatalog;
@@ -91,7 +105,7 @@ private:
 	void XmlLoadInstrument(IXMLDOMNode* xml);
 	void XmlLoadEffectList(IXMLDOMNode* xml);
 	void AddEffect(CEffect* effect);
-	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument, std::wstring & effect);
+	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument, std::wstring& effect);
 	void XmlLoadRecording(IXMLDOMNode* xml);
 	void XmlLoadRecordedEffect(IXMLDOMNode* xml);
 };
