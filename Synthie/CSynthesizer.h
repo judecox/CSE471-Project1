@@ -37,14 +37,7 @@ public:
 	//! Set the number of channels
 	void SetNumChannels(int n)
 	{
-		if (frameout != nullptr)
-		{
-			free(frameout);
-			frameout = nullptr;
-		}
-
 		m_channels = n;
-		frameout = (double*)calloc(m_channels, sizeof(double));
 	}
 
 	//! Set the sample rate
@@ -85,10 +78,6 @@ private:
 	/// The current beat within the measure
 	/// </summary>
 	double m_beat;
-	/// <summary>
-	/// Buffer for the effects
-	/// </summary>
-	double* frameout;
 
 	std::vector<CEffect*> m_effects;
 	std::map<std::wstring, CEffect*> m_effectCatalog;

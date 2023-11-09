@@ -19,8 +19,6 @@ CSynthesizer::CSynthesizer()
 {
 	CoInitialize(NULL);
 
-	frameout = nullptr;
-
 	m_channels = 2;
 	m_sampleRate = 44100.;
 	m_samplePeriod = 1 / m_sampleRate;
@@ -54,9 +52,6 @@ CSynthesizer::~CSynthesizer()
 	m_instruments.clear();
 	m_notes.clear();
 	m_effectCatalog.clear();
-
-	free(frameout);
-	frameout = nullptr;
 }
 
 //! Start the synthesizer
@@ -183,9 +178,11 @@ bool CSynthesizer::Generate(double* frame)
 			// Do effects.
 			if (instrument->m_effectID.length() > 0)
 			{
+				double* frameout = (double*)calloc(m_channels, sizeof(double));
 				m_effectCatalog[instrument->m_effectID]->Process(frame, frameout, m_time);
 
 				std::copy(frameout, frameout + m_channels, frame);
+				free(frameout);
 			}
 		}
 		else
