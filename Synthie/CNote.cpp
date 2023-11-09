@@ -24,11 +24,12 @@ bool CNote::operator<(const CNote& b)
 }
 
 
-void CNote::XmlLoad(IXMLDOMNode* xml, std::wstring& instrument)
+void CNote::XmlLoad(IXMLDOMNode* xml, std::wstring& instrument, std::wstring & effect)
 {
     // Remember the xml node and the instrument.
     m_node = xml;
     m_instrument = instrument;
+    m_effectID = effect;
 
     // Get a list of all attribute nodes and the
     // length of that list
@@ -65,9 +66,10 @@ void CNote::XmlLoad(IXMLDOMNode* xml, std::wstring& instrument)
             value.ChangeType(VT_R8);
             m_beat = value.dblVal - 1;
         }
-        else if (name == L"effects")
+        else if (name == L"effect")
         {
-            // Also effects.
+            // Also effects. Why are effects declared twice?
+            // The note can be overriden by the note itself.
             m_effectID = value.bstrVal;
         }
     }
