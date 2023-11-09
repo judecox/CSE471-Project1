@@ -10,7 +10,7 @@ class CInstrument :
 public:
     virtual void SetNote(CNote* note) = 0;
 
-	void SetDuration(double d) { m_ar.SetDuration(d);}
+	virtual void SetDuration(double d) { m_ar.SetDuration(d);}
 
 	double Duration() { return m_ar.Duration(); }
 
