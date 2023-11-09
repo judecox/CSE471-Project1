@@ -15,9 +15,9 @@ CEffectFactory::CEffectFactory(int channels, double sampleRate, double samplePer
 	m_sampleRate = sampleRate;
 }
 
-std::vector<CEffect*> CEffectFactory::XmlLoadEffects(IXMLDOMNode* xml)
+std::vector<std::shared_ptr<CEffect>> CEffectFactory::XmlLoadEffects(IXMLDOMNode* xml)
 {
-	std::vector<CEffect*> effects = std::vector<CEffect*>();
+	std::vector<std::shared_ptr<CEffect>> effects = std::vector<std::shared_ptr<CEffect>>();
 
 	// Drop into child.
 	CComPtr<IXMLDOMNode> node;
@@ -39,42 +39,42 @@ std::vector<CEffect*> CEffectFactory::XmlLoadEffects(IXMLDOMNode* xml)
 
 		if (nodeName == L"serial")
 		{
-			CSerialEffects* sEffs = new CSerialEffects(m_channels, m_sampleRate, m_samplePeriod);
+			std::shared_ptr<CSerialEffects> sEffs = std::make_shared<CSerialEffects>(m_channels, m_sampleRate, m_samplePeriod);
 			sEffs->XmlLoad(node);
 
 			effects.push_back(sEffs);
 		}
 		else if (nodeName == L"parallel")
 		{
-			CParallelEffects* pEffs = new CParallelEffects(m_channels, m_sampleRate, m_samplePeriod);
+			std::shared_ptr<CParallelEffects> pEffs = std::make_shared<CParallelEffects>(m_channels, m_sampleRate, m_samplePeriod);
 			pEffs->XmlLoad(node);
 
 			effects.push_back(pEffs);
 		}
 		else if (nodeName == L"gate")
 		{
-			CNoiseGate* gate = new CNoiseGate(m_channels, m_sampleRate, m_samplePeriod);
+			std::shared_ptr<CNoiseGate> gate = std::make_shared<CNoiseGate>(m_channels, m_sampleRate, m_samplePeriod);
 			gate->XmlLoad(node);
 
 			effects.push_back(gate);
 		}
 		else if (nodeName == L"compress")
 		{
-			CCompressor* compress = new CCompressor(m_channels, m_sampleRate, m_samplePeriod);
+			std::shared_ptr<CCompressor> compress = std::make_shared<CCompressor>(m_channels, m_sampleRate, m_samplePeriod);
 			compress->XmlLoad(node);
 
 			effects.push_back(compress);
 		}
 		else if (nodeName == L"flange")
 		{
-			CFlange* flange = new CFlange(m_channels, m_sampleRate, m_samplePeriod);
+			std::shared_ptr<CFlange> flange = std::make_shared<CFlange>(m_channels, m_sampleRate, m_samplePeriod);
 			flange->XmlLoad(node);
 
 			effects.push_back(flange);
 		}
 		else if (nodeName == L"chorus" || nodeName == L"choir")
 		{
-			CChorus* choir = new CChorus(m_channels, m_sampleRate, m_samplePeriod);
+			std::shared_ptr<CChorus> choir = std::make_shared<CChorus>(m_channels, m_sampleRate, m_samplePeriod);
 			choir->XmlLoad(node);
 
 			effects.push_back(choir);

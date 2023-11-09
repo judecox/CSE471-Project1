@@ -4,11 +4,6 @@
 
 CEffectsGroup::~CEffectsGroup()
 {
-	for each (auto * effect in m_effects)
-	{
-		delete effect;
-	}
-
 	m_effects.clear();
 }
 

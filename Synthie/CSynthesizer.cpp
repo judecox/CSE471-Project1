@@ -28,30 +28,12 @@ CSynthesizer::CSynthesizer()
 	m_secperbeat = 0.5;
 	m_beatspermeasure = 4;
 
-	m_effects = std::vector<CEffect*>();
+	m_effects = std::vector<std::shared_ptr<CEffect>>();
 }
 
 CSynthesizer::~CSynthesizer()
 {
-	for each (auto * effect in m_effects)
-	{
-		delete effect;
-	}
-
-	for each (auto * instrument in m_instruments)
-	{
-		delete instrument;
-	}
-
-	for each (auto* note in m_notes)
-	{
-		delete note;
-	}
-
-	m_effects.clear();
-	m_instruments.clear();
-	m_notes.clear();
-	m_effectCatalog.clear();
+	Clear();
 }
 
 //! Start the synthesizer
@@ -181,11 +163,7 @@ bool CSynthesizer::Generate(double* frame)
 				double* frameout = (double*)calloc(m_channels, sizeof(double));
 				m_effectCatalog[instrument->m_effectID]->Process(frame, frameout, m_time);
 
-				for (int c = 0; c < m_channels; c++)
-				{
-					frame[c] = frameout[c];
-				}
-
+				std::copy(frameout, frameout + m_channels, frame);
 				free(frameout);
 			}
 		}
@@ -253,7 +231,7 @@ bool CSynthesizer::Generate(double* frame)
 	// Phase 3.5: Overlay Effects
 	//
 	//double* frameout = (double*)calloc(m_channels, sizeof(double));
-	//for each (CEffect* effect in m_effects)
+	//for each (std::shared_ptr<CEffect> effect in m_effects)
 	//{
 	//	// Process the frame. Make sure to use two different arrays to avoid
 	//	// funny C++ activity.
@@ -300,22 +278,18 @@ bool CSynthesizer::Generate(double* frame)
 
 void CSynthesizer::Clear(void)
 {
-	for each (CEffect * effect in m_effects)
-	{
-		delete effect;
-	}
-
-	for each (CInstrument * instrument in m_instruments)
+	for each (auto * instrument in m_instruments)
 	{
 		delete instrument;
 	}
 
-	for each (CNote * note in m_notes)
+	for each (auto * note in m_notes)
 	{
 		delete note;
 	}
 
 	m_effects.clear();
+	m_effectCatalog.clear();
 	m_instruments.clear();
 	m_notes.clear();
 }
@@ -497,7 +471,7 @@ void CSynthesizer::XmlLoadEffectList(IXMLDOMNode* xml)
 	CEffectFactory effFactory(m_channels, m_sampleRate, m_samplePeriod);
 	auto effects = effFactory.XmlLoadEffects(xml);
 	
-	for each (auto* eff in effects)
+	for each (auto eff in effects)
 	{
 		AddEffect(eff);
 	}
@@ -622,7 +596,7 @@ void CSynthesizer::XmlLoadRecordedEffect(IXMLDOMNode* xml)
 	m_recorded_effect_parameters.push_back(recording_effect_parameter);
 }
 
-void CSynthesizer::AddEffect(CEffect* effect)
+void CSynthesizer::AddEffect(std::shared_ptr<CEffect> effect)
 {
 	m_effects.push_back(effect);
 	m_effectCatalog[effect->m_id] = effect;

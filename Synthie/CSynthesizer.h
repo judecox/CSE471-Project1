@@ -79,8 +79,8 @@ private:
 	/// </summary>
 	double m_beat;
 
-	std::vector<CEffect*> m_effects;
-	std::map<std::wstring, CEffect*> m_effectCatalog;
+	std::vector<std::shared_ptr<CEffect>> m_effects;
+	std::map<std::wstring, std::shared_ptr<CEffect>> m_effectCatalog;
 	std::list<CInstrument*>  m_instruments;
 	std::vector<CNote*> m_notes;
 	std::vector<double> m_recorded_effect_timestamps;
@@ -93,7 +93,7 @@ private:
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);
 	void XmlLoadEffectList(IXMLDOMNode* xml);
-	void AddEffect(CEffect* effect);
+	void AddEffect(std::shared_ptr<CEffect> effect);
 	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument, std::wstring& effect);
 	void XmlLoadRecording(IXMLDOMNode* xml);
 	void XmlLoadRecordedEffect(IXMLDOMNode* xml);
