@@ -2,8 +2,8 @@
 <score bpm="96" beatspermeasure="4">
    <effects>
       <parallel id="choirMultiVoice01">
-         <choir id="choir01" delay="0.1" rate="1" amount="0.5" mix="0.5" />
-         <choir id="choir02" phase="0.5" delay="0.1" rate="1" amount="0.5" mix="0.5" />
+         <choir id="choir01" delay="0.1" rate="1" amount=".5" mix="0.5" />
+         <choir id="choir02" phase="0.1" delay="0.1" rate="1" amount=".5" mix="0.5" />
       </parallel>
    </effects>
    <instrument instrument="ToneInstrument" effect="choirMultiVoice01">

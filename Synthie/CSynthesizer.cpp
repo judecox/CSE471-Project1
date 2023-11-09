@@ -181,7 +181,11 @@ bool CSynthesizer::Generate(double* frame)
 				double* frameout = (double*)calloc(m_channels, sizeof(double));
 				m_effectCatalog[instrument->m_effectID]->Process(frame, frameout, m_time);
 
-				std::copy(frameout, frameout + m_channels, frame);
+				for (int c = 0; c < m_channels; c++)
+				{
+					frame[c] = frameout[c];
+				}
+
 				free(frameout);
 			}
 		}
