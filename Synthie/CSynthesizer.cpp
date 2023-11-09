@@ -401,7 +401,7 @@ void CSynthesizer::XmlLoadScore(IXMLDOMNode* xml)
 		{
 			value.ChangeType(VT_R8);
 			m_bpm = value.dblVal;
-			m_secperbeat = 1 / (m_bpm / 60);
+			m_secperbeat = 1 / (m_bpm / 60.0);
 		}
 		else if (name == L"beatspermeasure")
 		{
@@ -438,6 +438,7 @@ void CSynthesizer::XmlLoadScore(IXMLDOMNode* xml)
 void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 {
 	wstring instrument = L"";
+	wstring effect = L"";
 
 	// Get a list of all attribute nodes and the
 	// length of that list
@@ -465,6 +466,10 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 		{
 			instrument = value.bstrVal;
 		}
+		else if (name == "effect")
+		{
+			effect = value.bstrVal;
+		}
 	}
 
 
@@ -478,7 +483,7 @@ void CSynthesizer::XmlLoadInstrument(IXMLDOMNode* xml)
 
 		if (name == L"note")
 		{
-			XmlLoadNote(node, instrument);
+			XmlLoadNote(node, instrument, effect);
 		}
 	}
 }
@@ -619,10 +624,10 @@ void CSynthesizer::AddEffect(CEffect* effect)
 	m_effectCatalog[effect->m_id] = effect;
 }
 
-void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument)
+void CSynthesizer::XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument, std::wstring & effect)
 {
 	CNote* note = new CNote();
-	note->XmlLoad(xml, instrument);
+	note->XmlLoad(xml, instrument, effect);
 	m_notes.push_back(note);
 }
 

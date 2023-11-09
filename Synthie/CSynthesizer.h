@@ -91,7 +91,7 @@ private:
 	void XmlLoadInstrument(IXMLDOMNode* xml);
 	void XmlLoadEffectList(IXMLDOMNode* xml);
 	void AddEffect(CEffect* effect);
-	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument);
+	void XmlLoadNote(IXMLDOMNode* xml, std::wstring& instrument, std::wstring & effect);
 	void XmlLoadRecording(IXMLDOMNode* xml);
 	void XmlLoadRecordedEffect(IXMLDOMNode* xml);
 };
