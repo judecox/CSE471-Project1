@@ -1,29 +1,35 @@
 #include "pch.h"
 #include "CPiano.h"
 #include "Notes.h"
+using namespace std;
 
 CPiano::CPiano()
 {
-	m_bpm = 120;
 }
 
 void CPiano::Start()
 {
-    m_sinewave.SetSampleRate(GetSampleRate());
-    m_sinewave.Start();
+    m_waveform.SetSampleRate(GetSampleRate());
+    m_waveform.Start();
     m_time = 0;
 
     // Tell the AR object it gets its samples from 
     // the sine wave object.
-    m_ar.SetSource(&m_sinewave);
+    m_ar.SetSource(&m_waveform);
     m_ar.SetSampleRate(GetSampleRate());
+
+    // Chnage the AR object's parameters
+    m_ar.SetAttack(m_waveform.Attack());
+    m_ar.SetRelease(m_waveform.Release());
+
+    // Start the AR object
     m_ar.Start();
 }
 
 bool CPiano::Generate()
 {
     // Tell the component to generate an audio sample
-    m_sinewave.Generate();
+    m_waveform.Generate();
     bool valid = m_ar.Generate();
 
     // Read the component's sample and make it our resulting frame.
@@ -32,6 +38,7 @@ bool CPiano::Generate()
 
     // Update time
     m_time += GetSamplePeriod();
+    // m_ar.SetTime(m_waveform.Time());
 
     // We return true until the time reaches the duration.
     return valid;
@@ -69,10 +76,12 @@ void CPiano::SetNote(CNote* note)
         {
             value.ChangeType(VT_R8);
             SetDuration((value.dblVal) * (60.0 / m_bpm));
+            m_waveform.SetDuration((value.dblVal) * (60.0 / m_bpm));
         }
         else if (name == "note")
         {
-            SetFreq(NoteToFrequency(value.bstrVal));
+            wstring noteName(value.bstrVal, SysStringLen(value.bstrVal));
+            m_waveform.LoadSampleIntoTable(noteName);
         }
 
     }

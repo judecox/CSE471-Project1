@@ -4,7 +4,6 @@
 
 COrgan::COrgan(void)
 {
-    m_duration = 0.1;
 }
 
 void COrgan::Start()
@@ -75,6 +74,62 @@ void COrgan::SetNote(CNote* note)
         {
             SetFreq(NoteToFrequency(value.bstrVal));
         }
+		else if (name == "leslieAttack")
+		{
+			value.ChangeType(VT_R8);
+			m_wave.SetLeslieAttack(value.dblVal);
+		}
+		else if (name == "leslieRelease")
+		{
+			value.ChangeType(VT_R8);
+			m_wave.SetLeslieRelease(value.dblVal);
+		}
+		else if (name == "leslieFreq")
+		{
+			value.ChangeType(VT_R8);
+			m_wave.SetLeslieFreq(value.dblVal);
+			m_wave.SetLeslieChanged(true);
+		}
+		else if (name == "leslieEnd")
+		{
+			value.ChangeType(VT_R8);
+			m_wave.SetLeslieEnd(value.dblVal);
+		}
+		else if (name == "leslieRad")
+		{
+			value.ChangeType(VT_R8);
+			m_wave.SetLeslieRad(value.dblVal);
+		}
+		else if (name == "vibratoMag")
+		{
+			value.ChangeType(VT_R8);
+			m_wave.SetVibratoMag(value.dblVal);
+		}
+		else if (name == "vibratoFreq")
+		{
+			value.ChangeType(VT_R8);
+			m_wave.SetVibratoFreq(value.dblVal);
+		}
+		else if (name == "attack")
+		{
+			value.ChangeType(VT_R8);
+			m_ar.SetAttack(value.dblVal);
+		}
+		else if (name == "release")
+		{
+			value.ChangeType(VT_R8);
+			m_ar.SetRelease(value.dblVal);
+		}
+		else if (name == "amplitude")
+		{
+			value.ChangeType(VT_R8);
+			SetAmplitude(value.dblVal);
+		}
+		else if (name == "drawbar")
+		{
+			value.ChangeType(VT_I4);
+			m_wave.SetDrawbar(value.intVal);
+		}
 
     }
 

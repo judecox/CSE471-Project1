@@ -149,6 +149,7 @@
     <ClCompile Include="CSynthesizer.cpp" />
     <ClCompile Include="CToneInstrument.cpp" />
     <ClCompile Include="CWaveform.cpp" />
+    <ClCompile Include="CWaveformPiano.cpp" />
     <ClCompile Include="CWavetable.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Notes.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="CSynthesizer.h" />
     <ClInclude Include="CToneInstrument.h" />
     <ClInclude Include="CWaveform.h" />
+    <ClInclude Include="CWaveformPiano.h" />
     <ClInclude Include="CWavetable.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Notes.h" />

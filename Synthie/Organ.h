@@ -17,10 +17,14 @@ public:
 	void SetFreq(double f) { m_wave.SetFreq(f); }
 	void SetAmplitude(double a) { m_wave.SetAmplitude(a); }
 
+	void SetDuration(double d) override {
+		CInstrument::SetDuration(d);
+		m_wave.SetDuration(d);
+	};
+
 
 private:
 	COrganWave   m_wave;
-	double m_duration;
 	double m_time;
 };
 
