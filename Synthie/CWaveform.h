@@ -10,7 +10,7 @@ public:
 
     void PrepareFileList();
 
-    void LoadSampleIntoTable(std::wstring note);
+    void LoadSampleIntoTable(int noteId, int type);
 
     int GetSampleIdFromNote(std::wstring note);
 
@@ -32,6 +32,8 @@ public:
 
     void SetDuration(double d) { m_duration = d; }
 
+    void SetNextNote(int note) { m_nextNote = note; }
+
     double Duration() { return m_duration; }
 
     double Attack() { return m_attack; }
@@ -42,6 +44,10 @@ public:
 
     double LoopEnd() { return m_loopEnd; }
 
+    // int NoteToPlay() { return m_noteToPlay; }
+
+    // int NextNote() { return m_nextNote; }
+
 private:
     double m_time;
     // double m_freq;
@@ -49,9 +55,10 @@ private:
     double m_duration;
     double m_attack = 0.01;
     double m_release = 0.03;
-    double m_loopStart = 0.095;  // Previously 0.055
+    double m_loopStart = 0.055;  // Previously 0.055
     double m_loopEnd = 0.1;
     int m_noteToPlay;
+    int m_nextNote;
     int m_frameIndex = 0;
 
     // List of notes
@@ -65,4 +72,7 @@ private:
 
     // Lookup table to be generated when the waveform is initialized
     std::vector<std::vector<short>> m_LookupTable;
+
+    // DEBUG
+    std::vector<int> m_notesPlayed;
 };

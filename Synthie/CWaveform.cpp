@@ -38,19 +38,33 @@ void CWaveform::PrepareFileList()
 	}
 }
 
-void CWaveform::LoadSampleIntoTable(std::wstring note)
+void CWaveform::LoadSampleIntoTable(int noteId, int type)
 {
-	// Get sample number from note name
-	m_noteToPlay = GetSampleIdFromNote(note);
+	// Break if noteId is outside valid note range
+	if ((noteId < 0) || (noteId > 47))
+		return;
 
 	// Check if the sample is already in the table.
 	// If it is, don't read it in again!
-	if (m_LookupTable[m_noteToPlay].size() != 0)
+	if (m_LookupTable[noteId].size() > 0)
 		return;
+	
+	// Set appropriate note memnber variables
+	if (type == 0)
+	{
+		m_noteToPlay = noteId;
+	}
+	else if (type == 1)
+	{
+		m_nextNote = noteId;
+	}
+	// If type is not 0 or 1,
+	// the note is a gliss note
+	// and need not be recorded
 	
 	CDirSoundSource audioin;
 
-	if (!audioin.Open(m_fileList[m_noteToPlay].c_str()))
+	if (!audioin.Open(m_fileList[noteId].c_str()))
 		return;
 
 	// Read the sample into memory
@@ -60,11 +74,10 @@ void CWaveform::LoadSampleIntoTable(std::wstring note)
 
 		audioin.ReadFrame(audio);
 
-		m_LookupTable[m_noteToPlay].push_back(audio[0]);
+		m_LookupTable[noteId].push_back(audio[0]);
 	}
 
 	audioin.Close();
-
 }
 
 int CWaveform::GetSampleIdFromNote(std::wstring note)
@@ -99,14 +112,21 @@ void CWaveform::Start()
 bool CWaveform::Generate()
 {
 	// Use base function to start generate.
-	//int const i = int(m_time / GetSamplePeriod()) % m_LookupTable[m_noteToPlay].size();
-	int const i = m_frameIndex % m_LookupTable[m_noteToPlay].size();
-	m_frame[0] = double(m_LookupTable[m_noteToPlay][i]) / 65535.0;
+	int glissTarget = ((m_nextNote > 0) && (m_nextNote < 47)) ? m_nextNote - m_noteToPlay : 0;
+	glissTarget = (m_nextNote != m_noteToPlay) ? glissTarget : 0;
+
+	int glissAmount = int(glissTarget * m_time / m_duration);
+	if (glissAmount > 1)
+		glissAmount += 0;
+	int sample = m_noteToPlay + glissAmount;
+
+	LoadSampleIntoTable(sample, 2);
+	int const i = m_frameIndex % m_LookupTable[sample].size();
+	m_frame[0] = double(m_LookupTable[sample][i]) / 65535.0;
 	m_frame[0] *= m_amp;
 	m_frame[1] = m_frame[0];
 
 	m_frameIndex++;
-
 	m_time += GetSamplePeriod();
 
 	// If the note hasn't yet been played long enough
