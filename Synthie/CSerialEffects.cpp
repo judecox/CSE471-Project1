@@ -10,7 +10,7 @@ void CSerialEffects::Process(const double* frameIn, double* frameOut, const doub
 	double* buffer = (double*)calloc(m_channels, sizeof(double));
 	std::copy(frameIn, frameIn + m_channels, buffer);
 	
-	for each (CEffect * effect in m_effects)
+	for each (auto effect in m_effects)
 	{
 		// Process the frame. Make sure to use two different arrays to avoid
 		// funny C++ activity.

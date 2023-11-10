@@ -17,33 +17,37 @@ CChorus::CChorus(int channels, double sampleRate, double samplePeriod) : CEffect
 void CChorus::ResetBuffer()
 {
 	m_bufferIndex = 0;
-	m_bufferSize = (int)std::ceil(m_channels * (m_amplitude + m_delay) * m_sampleRate);
+	m_bufferSize = (int)std::ceil((m_channels + 1) * m_delay * m_sampleRate);
 	m_frameHistory = std::vector<double>(m_bufferSize);
+	std::fill(m_frameHistory.begin(), m_frameHistory.end(), 0);
 }
 
 void CChorus::Process(const double* frameIn, double* frameOut, const double& time)
 {
 	// First calculate the waveform. This will be the waveform of the
 	// distortion in samples.
-	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
-
-	const int delayed = (int)std::ceil((m_delay + m_amplitude) * m_sampleRate);
+	const int delayed = (int)std::ceil(m_channels * m_delay * m_sampleRate);
 	m_phase += m_frequency * m_samplePeriod;
+
+	if (frameIn[0] == 0)
+	{
+		int yup = -1;
+	}
 
 	// Use frameHistory as a circular buffer.
 	for (int c = 0; c < m_channels; c++)
 	{
 		const double input = frameIn[c];
-		double output = frameOut[c];
 
-		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
+		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed - c, m_bufferSize));
 
 		// Avoid underflow.
 		if (i < 0)
 			i += m_bufferSize;
 
 		// Set output, include wetness.
-		output = input * (1.0 - m_wetness);
+		const double waveform = m_amplitude * sin((m_phase - c * m_balanceOffset) * 2 * PI);
+		double output = input * (1.0 - m_wetness);
 		output += m_frameHistory[i] * waveform * m_wetness;
 
 		// Delayed signal
@@ -78,6 +82,11 @@ void CChorus::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 	{
 		value.ChangeType(VT_R8);
 		m_phase = value.dblVal;
+	}
+	else if (name == L"channelOffset" || name == L"offset")
+	{
+		value.ChangeType(VT_R8);
+		m_balanceOffset = value.dblVal;
 	}
 	else if (name == L"mix" || name == L"wetness")
 	{

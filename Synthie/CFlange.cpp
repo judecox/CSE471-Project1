@@ -9,7 +9,7 @@ CFlange::CFlange(int channels, double sampleRate, double samplePeriod) : CEffect
 	m_amplitude = 1;
 
 	m_bufferIndex = 0;
-	m_bufferSize = (int)std::ceil(m_channels * m_amplitude * m_sampleRate);
+	m_bufferSize = (int)std::ceil((m_channels + 1) * m_amplitude * m_sampleRate);
 
 	m_feedback = 0.5;
 	m_wetness = 0.5;
@@ -28,16 +28,16 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 	// distortion in samples.
 	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
 
-	const int delayed = (int)std::ceil(m_amplitude * m_sampleRate);
+	const int delayed = (int)std::ceil(m_channels * m_amplitude * m_sampleRate);
 	m_phase += m_frequency * m_samplePeriod;
 
 	// Use frameHistory as a circular buffer.
 	for (int c = 0; c < m_channels; c++)
 	{
 		const double input = frameIn[c];
-		double output = frameOut[c];
+		double output = 0;
 
-		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed, m_bufferSize));
+		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed - c, m_bufferSize));
 
 		// Avoid underflow.
 		if (i < 0)
@@ -49,7 +49,7 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 
 
 		// Feedback
-		m_frameHistory[m_bufferIndex] = output * m_feedback + 
+		m_frameHistory[m_bufferIndex] = output * m_feedback +
 			frameIn[c] * (1 - m_feedback);
 
 		// Next index

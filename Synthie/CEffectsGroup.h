@@ -1,13 +1,14 @@
 #pragma once
 #include "CEffect.h"
 #include <vector>
+#include <memory>
 
 class CEffectsGroup :
     public CEffect
 {
     // Member variables
 protected:
-    std::vector<CEffect*> m_effects;
+    std::vector<std::shared_ptr<CEffect>> m_effects;
 
     // Constructor & Destructor
 public:
