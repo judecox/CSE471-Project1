@@ -7,8 +7,6 @@ using namespace std;
 
 CWaveform::CWaveform()
 {
-	m_glissAmountOld = 999999999;
-
 	PrepareFileList();
 
 	// Fill the lookup table with empty vectors.
@@ -122,8 +120,6 @@ bool CWaveform::Generate()
 		glissCoeff = 1;
 
 	int glissAmount = int(glissDiff * glissCoeff);
-	if ((glissDiff != 0) && ((m_glissAmountOld == 999999999) || (m_glissAmountOld != glissAmount)))
-		m_glissAmountOld = glissAmount;
 	int sample = m_noteToPlay + glissAmount;
 
 	LoadSampleIntoTable(sample, 2);

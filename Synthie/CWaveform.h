@@ -61,7 +61,6 @@ private:
     int m_nextNote;
     int m_frameIndex = 0;
     int m_loopNum;
-    int m_glissAmountOld;
 
     // List of notes
     std::vector<std::wstring> m_noteList { L"C", L"Db", L"D", L"Eb", L"E", L"F", L"Gb", L"G", L"Ab", L"A", L"Bb", L"B" };
