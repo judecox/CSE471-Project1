@@ -85,8 +85,13 @@ void CWavetable::SetNote(CNote* note)
         {
             // SetFreq(NoteToFrequency(value.bstrVal));
             wstring noteName(value.bstrVal, SysStringLen(value.bstrVal));
-            m_waveform.LoadSampleIntoTable(noteName);
+            m_waveform.LoadSampleIntoTable(m_waveform.GetSampleIdFromNote(noteName), 0);
+            m_waveform.SetNextNote(99);
         }
-
+        else if (name == "gliss")
+        {
+            wstring noteName(value.bstrVal, SysStringLen(value.bstrVal));
+            m_waveform.LoadSampleIntoTable(m_waveform.GetSampleIdFromNote(noteName), 1);
+        }
     }
 }

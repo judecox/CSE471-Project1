@@ -9,6 +9,7 @@
 #include "CEffect.h"
 #include "CRecordedAudio.h"
 #include <map>
+#include <CPianoBuild.h>
 
 class CSynthesizer
 {
@@ -89,6 +90,8 @@ private:
 
 	CRecordedAudio m_recorded;
 	double m_recorded_start_time = 0.0;
+
+	CPianoBuild m_pianoBuild;
 
 	void XmlLoadScore(IXMLDOMNode* xml);
 	void XmlLoadInstrument(IXMLDOMNode* xml);

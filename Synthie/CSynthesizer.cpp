@@ -86,7 +86,8 @@ bool CSynthesizer::Generate(double* frame)
 		}
 		else if (instrName == L"piano")
 		{
-			instrument = new CPiano();
+			m_pianoBuild.SetNote(&note);
+			instrument = m_pianoBuild.CreatePiano();
 		}
 		else if (instrName == L"organ")
 		{
