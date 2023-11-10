@@ -7,44 +7,19 @@
 class CWaveformPiano : public CAudioNode
 {
 public:
-    CWaveformPiano();
+    CWaveformPiano(void);
+    ~CWaveformPiano(void);
 
-    void PrepareFileList();
-
-    void LoadSampleIntoTable(std::wstring note);
-
-    int GetSampleIdFromNote(std::wstring note);
-
-    void Start();
-
+public:
+    virtual void Start();
     virtual bool Generate();
 
-    void SetTime(double t) { m_time = t; }
-
-    double Time() { return m_time; }
-
-    void SetDuration(double d) { m_duration = d; }
-
-    double Duration() { return m_duration; }
-
-    double Attack() { return m_attack; }
-
-    double Release() { return m_release; }
-
-    double LoopStart() { return m_loopStart; }
-
-    double LoopEnd() { return m_loopEnd; }
+    void SetSamples(short* s, int n) { m_samples = s; m_numsamples = n; }
 
 private:
-    double m_time;
-    double m_amp;
-    double m_duration;
-    double m_attack = 0.01;
-    double m_release = 0.03;
-    double m_loopStart = 0.055;
-    double m_loopEnd = 0.1;
-    int m_noteToPlay;
-    int frameIndex = 0;
+    short* m_samples;
+    int    m_numsamples;
+    int    m_position;
 
     // List of notes
     std::vector<std::wstring> m_noteList { L"A0#l", L"A0#s", L"A0l", L"A0s", L"A1l", L"A1s", L"A1#l", L"A1#s", L"A2l", L"A2s", L"A2#l", L"A2#s", L"A3#l", L"A3#s", L"A3l", L"A3s", L"A4#l", L"A4#s", L"A4l", L"A4s", L"A5#l", L"A5#s", L"A5l", L"A5s", L"A6#l", L"A6#s", L"A6l", L"A6s", L"A7#l", L"A7#s", L"A7l", L"A7s", 
@@ -55,12 +30,6 @@ private:
                                            L"F1l", L"F1s", L"F1#l", L"F1#s", L"F2l", L"F2s", L"F2#l", L"F2#s", L"F3#l", L"F3#s", L"F3l", L"F3s", L"F4#l", L"F4#s", L"F4l", L"F4s", L"F5#l", L"F5#s", L"F5l", L"F5s", L"F6#l", L"F6#s", L"F6l", L"F6s", L"F7#l", L"F7#s", L"F7l", L"F7s",
                                            L"G1l", L"G1s", L"G1#l", L"G1#s", L"G2l", L"G2s", L"G2#l", L"G2#s", L"G3#l", L"G3#s", L"G3l", L"G3s", L"G4#l", L"G4#s", L"G4l", L"G4s", L"G5#l", L"G5#s", L"G5l", L"G5s", L"G6#l", L"G6#s", L"G6l", L"G6s", L"G7#l", L"G7#s", L"G7l", L"G7s",
                                            L"pedald", L"pedalu"};
-
-    // File list
-    std::vector<std::wstring> m_fileList;
-
-    // Lookup table to be generated when the waveform is initialized
-    std::vector<std::vector<short>> m_LookupTable;
 
 };
 
