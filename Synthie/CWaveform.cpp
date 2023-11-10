@@ -116,8 +116,6 @@ bool CWaveform::Generate()
 	glissTarget = (m_nextNote != m_noteToPlay) ? glissTarget : 0;
 
 	int glissAmount = int(glissTarget * m_time / m_duration);
-	if (glissAmount > 1)
-		glissAmount += 0;
 	int sample = m_noteToPlay + glissAmount;
 
 	LoadSampleIntoTable(sample, 2);

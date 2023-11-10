@@ -72,7 +72,4 @@ private:
 
     // Lookup table to be generated when the waveform is initialized
     std::vector<std::vector<short>> m_LookupTable;
-
-    // DEBUG
-    std::vector<int> m_notesPlayed;
 };
