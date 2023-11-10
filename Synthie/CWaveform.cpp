@@ -7,7 +7,7 @@ using namespace std;
 
 CWaveform::CWaveform()
 {
-	m_time = 0;
+	m_glissAmountOld = 999999999;
 
 	PrepareFileList();
 
@@ -106,16 +106,24 @@ int CWaveform::GetSampleIdFromNote(std::wstring note)
 void CWaveform::Start()
 {
 	m_time = 0;
+	m_loopNum = 0;
 	m_amp = 0.5;
 }
 
 bool CWaveform::Generate()
 {
 	// Use base function to start generate.
-	int glissTarget = ((m_nextNote > 0) && (m_nextNote < 47)) ? m_nextNote - m_noteToPlay : 0;
-	glissTarget = (m_nextNote != m_noteToPlay) ? glissTarget : 0;
+	double glissDiff = ((m_nextNote >= 0) && (m_nextNote <= 47)) ? m_nextNote - m_noteToPlay : 0;
+	// glissTarget = (m_nextNote != m_noteToPlay) ? glissTarget : 0;
 
-	int glissAmount = int(glissTarget * m_time / m_duration);
+	double glissTime = m_time + ((LoopEnd() - LoopStart()) * (m_loopNum + 1));
+	double glissCoeff = glissTime / m_duration;
+	if (glissCoeff > 1)
+		glissCoeff = 1;
+
+	int glissAmount = int(glissDiff * glissCoeff);
+	if ((glissDiff != 0) && ((m_glissAmountOld == 999999999) || (m_glissAmountOld != glissAmount)))
+		m_glissAmountOld = glissAmount;
 	int sample = m_noteToPlay + glissAmount;
 
 	LoadSampleIntoTable(sample, 2);
@@ -126,6 +134,7 @@ bool CWaveform::Generate()
 
 	m_frameIndex++;
 	m_time += GetSamplePeriod();
+	// m_totalTime += GetSamplePeriod();
 
 	// If the note hasn't yet been played long enough
 	// and the waveform's time is after the end of the loop,
@@ -134,6 +143,7 @@ bool CWaveform::Generate()
 	{
 		m_time = LoopStart();
 		m_frameIndex = int(LoopStart() / GetSamplePeriod());
+		m_loopNum++;
 	}
 
 	return true;
