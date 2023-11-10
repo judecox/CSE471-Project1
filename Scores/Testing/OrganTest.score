@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="120" beatspermeasure="4">
+   <instrument instrument="organ">
+	<note measure="1" beat="1" duration="4" note="C4" amplitude="0.1" drawbar="805020000" attack="0.05" decay="0.05" release="0.01" leslieRad="0.0" leslieAttack="0.0" leslieFreq="0.0" vibratoFreq="0" vibratoMag="0"/>
+	
+    <note measure="2" beat="1" duration="4" note="B4" amplitude="0.1" vibratoFreq="5" vibratoMag="1"/>
+	
+	<note measure="3" beat="1" duration="1" note="C4" amplitude="0.1" />
+	<note measure="3" beat="2" duration="1" note="E4" amplitude="0.1"/>
+	<note measure="3" beat="3" duration="1" note="B4" amplitude="0.1"/>
+	<note measure="3" beat="4" duration="1" note="G3" amplitude="0.1"/>
+    
+    <note measure="4" beat="1" duration="1" note="B4" amplitude="0.1" leslieFreq="4.5" leslieRad="15" leslieAttack="0.5"/>
+	<note measure="4" beat="2" duration="1" note="E4" amplitude="0.1" leslieFreq="3" leslieRad="10" leslieAttack="0.3"/>
+	<note measure="4" beat="3" duration="1" note="B4" amplitude="0.1" leslieFreq="2" leslieRad="10" leslieAttack="0.5"/>
+	<note measure="4" beat="4" duration="1" note="G3" amplitude="0.1" leslieFreq="7" leslieRad="5" leslieAttack="0.5"/>
+    
+    <note measure="5" beat="1" duration="2" note="B4" amplitude="0.1" leslieFreq="7" leslieRadius="5" leslieAttack="0.5" leslieRelease="1.0"/>
+    <note measure="5" beat="3" duration="2" note="E4" amplitude="0.1"/>
+
+   </instrument>
+   
+   
+</score>
