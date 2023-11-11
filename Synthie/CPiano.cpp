@@ -7,7 +7,7 @@ CPiano::CPiano()
 {
     m_attack = 0.05;
     m_release = 0.25;
-    m_volume = 1.0;
+    m_volume = 6.0;
     m_duration = 1.0;
     m_pedal = false;
     m_advDynamic = false;
