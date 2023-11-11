@@ -6,3 +6,6 @@ Grading Criteria - All specified points. There are 2 effects, in this case fuzz 
 
 Recorded Performance Score:
 See CSE471-Project1/Scores/RecordedPerformanceFinalScore.score for the score.
+
+Recorded Performance Audio Output:
+See Audio Outputs - FINAL RECORDINGS/RecordedPerformanceSynthesizedRecording.wav for the audio output.
