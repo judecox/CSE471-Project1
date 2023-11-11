@@ -1,4 +1,4 @@
-# [Title of Selection Here]
+# Project 1: Multi-Component Music Synthesizer
 [Placeholder audio. Replace.]
 
 
@@ -6,11 +6,11 @@ https://github.com/judecox/CSE471-Project1/assets/61844345/bd83dfd8-ac40-4593-85
 
 
 ## Group Members
-* Alex Charney
-* Jude Cox
-* Leo Hoerdeman
-* Ryan Chang
-* Kate Nagy
+* Alec Charney - Wavetable/Integration Management
+* Jude Cox - Piano/Git control
+* Leo Hoerdeman - Organ/Project Management
+* Ryan Chang - Effects/GitHub Presentation
+* Kate Nagy - Prerecorded synth/1-minute piece
 
 ## Navigation
 [Links to the component pages here. Example:]
@@ -27,10 +27,9 @@ effects within our score. Each note is tied to one instrument, and each
 instrument may be tied to one or more effects. We also allow any mixture of
 parallel or serial effects.
 
-The score file for [Title of Selection Here] is shown below for reference.
+A sample score file is shown below for reference.
 
 ```xml
-<!--NOT ACTUAL SCORE FILE! EXAMPLE ONLY! NEED REPLACEMENT!-->
 <?xml version="1.0" encoding="utf-8"?>
 <score bpm="120" beatspermeasure="2">
 	<effects>
@@ -74,5 +73,4 @@ The score file for [Title of Selection Here] is shown below for reference.
 		<note measure="8" beat="1" duration="3" note="D4" />
 	</instrument>
 </score>
-<!--NOT ACTUAL SCORE FILE! EXAMPLE ONLY! NEED REPLACEMENT!-->
 ```
