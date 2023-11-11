@@ -16,6 +16,7 @@ https://github.com/judecox/CSE471-Project1/assets/61844345/bd83dfd8-ac40-4593-85
 [Links to the component pages here. Example:]
 * [Wavetable](./ComponentPages/Wavetable.md)
 * [Organ](./ComponentPages/Organ.md)
+* [Piano](./ComponentPages/Piano.md)
 
 
 ## Project Information
