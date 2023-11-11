@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <score bpm="100" beatspermeasure="6">
 	<instrument instrument="piano">
-		<note measure="1" beat="1" pedal="released" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/C1#l.wav"/>
+		<note measure="1" beat="1" pedal="released" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/A5s.wav"/>
 		<note measure="1" beat="1" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/C2#l.wav"/>
 
 		<note measure="1" beat="1" duration="1" note="WaveSamples/CompletePiano/G1#s.wav"/>
