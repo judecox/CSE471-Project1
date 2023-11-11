@@ -23,7 +23,7 @@ void CWaveform::PrepareFileList()
 	{
 		for (auto note : m_noteList)
 		{
-			std::wstring filename = L"wavetable_samples/wavetable_";
+			std::wstring filename = L"WaveSamples/wavetable_samples/wavetable_";
 			if (n < 10)
 			{
 				filename += L"0";
