@@ -22,38 +22,24 @@ public:
 
     void SetDuration(double d) { m_duration = d; }
 
-    void SetLeslieAttack(double x) { m_leslieAttack = x; }
-    void SetLeslieRelease(double x) { m_leslieRelease = x; }
-    void SetLeslieStart(double x) { m_leslieStart = x; }
-    void SetLeslieEnd(double x) { m_leslieEnd = x; }
-    void SetLeslieFreq(double x) { m_leslieFreq = x; }
-    void SetLeslieChanged(bool x) { m_leslieChanged = x; }
-    void SetLeslieRad(double x) { m_leslieRadius = x; }
-    void SetVibratoMag(double x) { m_vibratoMag = x; }
-    void SetVibratoFreq(double x) { m_vibratoFreq = x; }
+    void SetLeslie(double x) { m_leslie = x; }
 
+    void SetVibrato(double x) { m_vibrato = x; }
 
-    void SetDrawbar(int x);
+    void SetDrawbar(WCHAR* x);
 
 private:
     double m_time;
     double m_freq;
     double m_amp;
-    double m_phase;
-    double m_vibrato_phase;
-    double m_vibratoFreq;
-    double m_vibratoMag;
-    bool m_leslieChanged;
-    double m_leslie_phase;
-    double m_leslieFreq;
-    double m_leslieStart;
-    double m_leslieEnd;
-    double m_leslieRadius;
-    double m_leslieAttack;
-    double m_leslieRelease;
+    std::vector <double> m_phase;
+    double m_vibrato;
+    double m_leslie;
     double m_duration;
 
     void UpdateLeslie();
+
+    void UpdateVibrato(int x, int i);
 
     struct harmonic {
 
@@ -74,6 +60,8 @@ private:
     };
 
     std::vector<harmonic> m_harmonics;
+
+    double m_amps[9] = {0, 0.0089, 0.0126, 0.0178, 0.0251, 0.0355, 0.0501, 0.0708 , .1};
 
 };
 
