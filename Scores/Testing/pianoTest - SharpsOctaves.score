@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="60" beatspermeasure="4">
+	<instrument instrument="piano">
+		<note measure="1" beat="1" pedal="pressed" note="WaveSamples/CompletePiano/A0#s.wav"/>
+		<note measure="1" beat="2" note="WaveSamples/CompletePiano/A0s.wav"/>
+		<note measure="1" beat="3" note="WaveSamples/CompletePiano/A1#s.wav"/>
+		<note measure="1" beat="4" note="WaveSamples/CompletePiano/A1s.wav"/>
+		<note measure="2" beat="1" pedal="released" note="WaveSamples/CompletePiano/A2#s.wav"/>
+		<note measure="2" beat="2" note="WaveSamples/CompletePiano/A2s.wav"/>
+		<note measure="2" beat="3" note="WaveSamples/CompletePiano/A3#s.wav"/>
+		<note measure="2" beat="4" note="WaveSamples/CompletePiano/A3s.wav"/>
+		<note measure="3" beat="1" note="WaveSamples/CompletePiano/A4#s.wav"/>
+		<note measure="3" beat="2" note="WaveSamples/CompletePiano/A4s.wav"/>
+		<note measure="3" beat="3" note="WaveSamples/CompletePiano/A5#s.wav"/>
+		<note measure="3" beat="4" note="WaveSamples/CompletePiano/A5s.wav"/>
+		<note measure="4" beat="1" note="WaveSamples/CompletePiano/A6#s.wav"/>
+		<note measure="4" beat="2" note="WaveSamples/CompletePiano/A6s.wav"/>
+		<note measure="4" beat="3" note="WaveSamples/CompletePiano/A7#s.wav"/>
+		<note measure="4" beat="4" note="WaveSamples/CompletePiano/A7s.wav"/>
+	</instrument>
+</score>
