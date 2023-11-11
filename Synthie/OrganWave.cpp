@@ -3,7 +3,7 @@
 
 COrganWave::COrganWave()
 {
-    m_amp = 1;
+    m_amp = .9;
     m_freq = 440;
 
 	m_harmonics.resize(9);
@@ -69,7 +69,7 @@ void COrganWave::UpdateLeslie()
 
 void COrganWave::UpdateVibrato(int x, int i)
 {
-	double vibMag = m_vibrato * (.75*(x / 2));
+	double vibMag = m_vibrato * (.05*(x / 2));
 	double vibFreq = m_vibrato*48;
 	double temp = x + (vibMag * sin(m_time * vibFreq));
 	m_phase[i] += temp * GetSamplePeriod();
