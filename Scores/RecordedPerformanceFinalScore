@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="96" beatspermeasure="4">
+   <instrument instrument="ToneInstrument">
+      <note measure="1" beat="1" duration="0.01" note="Ab4"/>
+      <note measure="9" beat="1" duration="0.01" note="Ab4"/>
+   </instrument>
+   <recording filename="C:\Users\nagy1\OneDrive\Documents\GitHub\CSE471-Project1\AudioFiles\CompletedRecordingDemo.wav" measure="1" beat="1">
+      <effectrecorded measure="1" beat="1" effect="0" parameter="0.3"/>
+      <effectrecorded measure="2" beat="3.5" effect="1" parameter="0.7"/>
+      <effectrecorded measure="2" beat="3.625" effect="1" parameter="0.8"/>
+      <effectrecorded measure="2" beat="3.75" effect="1" parameter="0.9"/>
+      <effectrecorded measure="3" beat="1" effect="1" parameter="0.975"/>
+      <effectrecorded measure="4" beat="1.1" effect="1" parameter="0.9"/>
+      <effectrecorded measure="4" beat="1.2" effect="1" parameter="0.85"/>
+      <effectrecorded measure="4" beat="1.3" effect="1" parameter="0.8"/>
+      <effectrecorded measure="4" beat="1.4" effect="1" parameter="0.75"/>
+      <effectrecorded measure="4" beat="1.5" effect="1" parameter="0.7"/>
+      <effectrecorded measure="4" beat="1.6" effect="1" parameter="0.65"/>
+      <effectrecorded measure="4" beat="1.7" effect="1" parameter="0.6"/>
+      <effectrecorded measure="4" beat="1.8" effect="1" parameter="0.55"/>
+      <effectrecorded measure="4" beat="1.9" effect="1" parameter="0.5"/>
+      <effectrecorded measure="4" beat="2" effect="1" parameter="0.45"/>
+      <effectrecorded measure="4" beat="2.1" effect="1" parameter="0.45"/>
+      <effectrecorded measure="4" beat="2.2" effect="1" parameter="0.35"/>
+      <effectrecorded measure="4" beat="2.3" effect="1" parameter="0.3"/>
+      <effectrecorded measure="4" beat="2.4" effect="1" parameter="0.25"/>
+      <effectrecorded measure="4" beat="2.5" effect="1" parameter="0.2"/>
+      <effectrecorded measure="4" beat="2.6" effect="1" parameter="0.15"/>
+      <effectrecorded measure="4" beat="2.7" effect="1" parameter="0.1"/>
+      <effectrecorded measure="4" beat="2.8" effect="1" parameter="0.05"/>
+      <effectrecorded measure="4" beat="2.9" effect="1" parameter="0.0"/>
+      <effectrecorded measure="5" beat="2" effect="0" parameter="15.0"/>
+      <effectrecorded measure="5" beat="2" effect="2" parameter="1.0"/>
+      <effectrecorded measure="5" beat="2" effect="3" parameter="0.01"/>
+      <effectrecorded measure="5" beat="2" effect="4" parameter="0.1"/>
+      <effectrecorded measure="5" beat="2.1" effect="4" parameter="0.09"/>
+      <effectrecorded measure="5" beat="2.2" effect="4" parameter="0.08"/>
+      <effectrecorded measure="5" beat="2.3" effect="4" parameter="0.07"/>
+      <effectrecorded measure="5" beat="2.4" effect="4" parameter="0.06"/>
+      <effectrecorded measure="5" beat="2.5" effect="4" parameter="0.05"/>
+      <effectrecorded measure="5" beat="2.6" effect="4" parameter="0.04"/>
+      <effectrecorded measure="5" beat="2.7" effect="4" parameter="0.03"/>
+      <effectrecorded measure="5" beat="2.8" effect="4" parameter="0.02"/>
+      <effectrecorded measure="6" beat="2.9" effect="4" parameter="0.01"/>
+      <effectrecorded measure="6" beat="3" effect="4" parameter="0.02"/>
+      <effectrecorded measure="6" beat="3.1" effect="4" parameter="0.03"/>
+      <effectrecorded measure="6" beat="3.2" effect="4" parameter="0.04"/>
+      <effectrecorded measure="6" beat="3.3" effect="4" parameter="0.05"/>
+      <effectrecorded measure="6" beat="3.4" effect="4" parameter="0.06"/>
+      <effectrecorded measure="6" beat="3.5" effect="4" parameter="0.07"/>
+      <effectrecorded measure="6" beat="3.6" effect="4" parameter="0.08"/>
+      <effectrecorded measure="6" beat="3.7" effect="4" parameter="0.09"/>
+      <effectrecorded measure="6" beat="3.8" effect="4" parameter="0.1"/>
+   </recording>
+</score>
