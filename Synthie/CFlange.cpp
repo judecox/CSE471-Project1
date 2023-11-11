@@ -24,28 +24,23 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 	// First calculate the waveform. This will be the waveform of the
 	// distortion in samples.
 	//const double waveform = m_amplitude * sin(m_phase * 2 * PI);
-	const double waveform = 1;
+	//const double waveform = 1;
 
-	m_phase += m_frequency * m_samplePeriod;
-
-	const double input = frameIn[0];
-	double output = 0;
-
-	if (m_delayIndex >= 0)
-	{
-		frameOut[0] = m_frameHistory.front();
-		m_frameHistory.pop();
-	}
-	else
-	{
-		frameOut[1] = input;
-	}
-	m_frameHistory.push(input);
+	//m_phase += m_frequency * m_samplePeriod;
 
 
-	// Next index
-	++m_bufferIndex;
-	++m_delayIndex;
+	m_delayIndex = (m_delayIndex + 1) % m_frameHistory.size();
+	m_frameHistory[m_delayIndex] = frameIn[0];
+
+	int delaylength = int((2 * m_sampleRate + 0.5)) * 2;
+	int rdloc = (m_delayIndex + m_frameHistory.size() - delaylength) % m_frameHistory.size();
+
+	frameOut[0] = m_frameHistory[rdloc++];
+
+
+	//// Next index
+	//++m_bufferIndex;
+	//++m_delayIndex;
 
 	//// Use frameHistory as a circular buffer.
 	//for (int c = 0; c < 1; c++)
@@ -124,7 +119,7 @@ void CFlange::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 void CFlange::Reset()
 {
 	//m_delayIndex = -(int)std::ceil(m_channels * m_sampleRate);
-	m_delayIndex = -60000;
+	m_delayIndex = 0;
 	m_bufferIndex = 0;
-	m_frameHistory = std::queue<double>();
+	m_frameHistory = std::vector<double>(800000);
 }
