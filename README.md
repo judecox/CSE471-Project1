@@ -1,4 +1,4 @@
---# Project 1: Multi-Component Music Synthesizer
+# Project 1: Multi-Component Music Synthesizer
 [Placeholder audio. Replace.]
 
 
