@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <score bpm="100" beatspermeasure="6">
 	<instrument instrument="piano">
-		<note measure="1" beat="1" pedal="released" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/C1#l.wav"/>
-		<note measure="1" beat="1" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/C2#l.wav"/>
+		<note measure="1" beat="1" pedal="released" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/C1#l.wav"/>
+		<note measure="1" beat="1" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/C2#l.wav"/>
 
 		<note measure="1" beat="1" duration="1" note="WaveSamples/CompletePiano/G1#s.wav"/>
 		<note measure="1" beat="2" duration="1" note="WaveSamples/CompletePiano/C4#s.wav"/>
@@ -20,8 +20,8 @@
 		<note measure="2" beat="5" duration="1" note="WaveSamples/CompletePiano/C4#s.wav"/>
 		<note measure="2" beat="6" pedal="pressed" duration="1" note="WaveSamples/CompletePiano/E4s.wav"/>
 		
-		<note measure="3" beat="1" pedal="released" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/B2l.wav"/>
-		<note measure="3" beat="1" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/B3l.wav"/>
+		<note measure="3" beat="1" pedal="released" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/B2l.wav"/>
+		<note measure="3" beat="1" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/B3l.wav"/>
 
 		<note measure="3" beat="1" duration="1" note="WaveSamples/CompletePiano/G1#s.wav"/>
 		<note measure="3" beat="2" duration="1" note="WaveSamples/CompletePiano/C4#s.wav"/>
@@ -39,8 +39,8 @@
 		<note measure="4" beat="5" duration="1" note="WaveSamples/CompletePiano/C4#s.wav"/>
 		<note measure="4" beat="6" pedal="pressed" duration="1" note="WaveSamples/CompletePiano/E4s.wav"/>
 
-		<note measure="5" beat="1" pedal="released" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/A2l.wav"/>
-		<note measure="5" beat="1" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/A3l.wav"/>
+		<note measure="5" beat="1" pedal="released" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/A2l.wav"/>
+		<note measure="5" beat="1" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/A3l.wav"/>
 
 		<note measure="5" beat="1" duration="1" note="WaveSamples/CompletePiano/A4s.wav"/>
 		<note measure="5" beat="2" duration="1" note="WaveSamples/CompletePiano/C4#s.wav"/>
@@ -50,8 +50,8 @@
 		<note measure="5" beat="5" duration="1" note="WaveSamples/CompletePiano/C4#s.wav"/>
 		<note measure="5" beat="6" pedal="pressed" duration="1" note="WaveSamples/CompletePiano/E4s.wav"/>
 
-		<note measure="6" beat="1" pedal="released" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/F1#l.wav"/>
-		<note measure="6" beat="1" duration="11" keydynamic="1" note="WaveSamples/CompletePiano/F2#l.wav"/>
+		<note measure="6" beat="1" pedal="released" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/F1#l.wav"/>
+		<note measure="6" beat="1" duration="3" keydynamic="1" note="WaveSamples/CompletePiano/F2#l.wav"/>
 
 		<note measure="6" beat="1" duration="1" note="WaveSamples/CompletePiano/A4s.wav"/>
 		<note measure="6" beat="2" duration="1" note="WaveSamples/CompletePiano/D4s.wav"/>

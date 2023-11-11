@@ -4,7 +4,7 @@
       <note measure="1" beat="1" duration="0.01" note="Ab4"/>
       <note measure="9" beat="1" duration="0.01" note="Ab4"/>
    </instrument>
-   <recording filename="C:\Users\nagy1\OneDrive\Documents\GitHub\CSE471-Project1\AudioFiles\CompletedRecordingDemo.wav" measure="1" beat="1">
+   <recording filename="CompletedRecordingDemo-CorrectSpacing.wav" measure="1" beat="1">
       <effectrecorded measure="1" beat="1" effect="0" parameter="0.3"/>
       <effectrecorded measure="2" beat="3.5" effect="1" parameter="0.7"/>
       <effectrecorded measure="2" beat="3.625" effect="1" parameter="0.8"/>
