@@ -1,6 +1,4 @@
 # Project 1: Multi-Component Music Synthesizer
-[Placeholder audio. Replace.]
-
 
 https://github.com/judecox/CSE471-Project1/assets/61844345/bd83dfd8-ac40-4593-8528-f89ee76ccd73
 
@@ -13,12 +11,11 @@ https://github.com/judecox/CSE471-Project1/assets/61844345/bd83dfd8-ac40-4593-85
 * Kate Nagy - Prerecorded synth/1-minute piece
 
 ## Navigation
-[Links to the component pages here. Example:]
 * [Wavetable](./ComponentPages/Wavetable.md)
 * [Organ](./ComponentPages/Organ.md)
 * [Piano](./ComponentPages/Piano.md)
 * [Recorded Performance](./ComponentPages/RecordedPerformance.md)
-
+* [Effects](./ComponentPages/Effects.md)
 
 ## Project Information
 ### Score File
