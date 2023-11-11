@@ -23,66 +23,30 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 {
 	// First calculate the waveform. This will be the waveform of the
 	// distortion in samples.
-	//const double waveform = m_amplitude * sin(m_phase * 2 * PI);
-	//const double waveform = 1;
+	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
+	m_phase += m_frequency * m_samplePeriod;
+	const int delay = int(0.01 * m_sampleRate + 0.5);
 
-	//m_phase += m_frequency * m_samplePeriod;
+	for (size_t i = 0; i < m_channels; i++)
+	{
+		m_frameHistory.push(frameIn[i] * waveform * m_feedback +
+			frameIn[i] * (1 - m_feedback));
+	}
 
+	for (size_t c = 0; c < m_channels; c++)
+	{
+		if (delay * m_channels <= m_frameHistory.size())
+		{
 
-	m_delayIndex = (m_delayIndex + 1) % m_frameHistory.size();
-	m_frameHistory[m_delayIndex] = frameIn[0];
-
-	int delaylength = int((2 * m_sampleRate + 0.5)) * 2;
-	int rdloc = (m_delayIndex + m_frameHistory.size() - delaylength) % m_frameHistory.size();
-
-	frameOut[0] = m_frameHistory[rdloc++];
-
-
-	//// Next index
-	//++m_bufferIndex;
-	//++m_delayIndex;
-
-	//// Use frameHistory as a circular buffer.
-	//for (int c = 0; c < 1; c++)
-	//{
-	//	const double input = frameIn[c];
-	//	double output = 0;
-
-	//	if (m_delayIndex >= 0)
-	//	{
-	//		frameOut[c] = m_frameHistory.front();
-	//		m_frameHistory.pop();
-	//	}
-	//	else
-	//	{
-	//		frameOut[c] = input;
-	//	}
-	//	m_frameHistory.push(input);
-
-
-	//	// Next index
-	//	++m_bufferIndex;
-	//	++m_delayIndex;
-
-	//	//// Set output, include wetness.
-	//	//output = input * (1.0 - m_wetness);
-
-	//	//if (m_delayIndex >= 0)
-	//	//	output += m_frameHistory[m_delayIndex] * waveform * m_wetness;
-
-
-	//	//// Feedback
-	//	////m_frameHistory[m_bufferIndex] = input * waveform * m_feedback +
-	//	////	input * (1 - m_feedback);
-	//	//m_frameHistory.push_back(input);
-
-	//	//// Next index
-	//	//++m_bufferIndex;
-	//	//++m_delayIndex;
-
-	//	//// Write output
-	//	//frameOut[c] = output;
-	//}
+			frameOut[c] = m_frameHistory.front() * m_wetness + 
+				frameIn[c] * (1 - m_wetness);
+			m_frameHistory.pop();
+		}
+		else
+		{
+			frameOut[c] = frameIn[c];
+		}
+	}
 }
 
 void CFlange::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value)
@@ -121,5 +85,5 @@ void CFlange::Reset()
 	//m_delayIndex = -(int)std::ceil(m_channels * m_sampleRate);
 	m_delayIndex = 0;
 	m_bufferIndex = 0;
-	m_frameHistory = std::vector<double>(800000);
+	m_frameHistory = std::queue<double>();
 }

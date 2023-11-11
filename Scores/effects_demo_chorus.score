@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<score bpm="80" beatspermeasure="4">
+    <effects>
+		<parallel id="choirDemo">
+            <choir id="CD_choir01" delay="0.3641" rate="0.2" amount="0.5" mix="0.5" />
+            <choir id="CD_choir02" phase="0.1" delay="0.2" offset="1" rate="0.3" amount="0.5" mix="0.5" />
+        </parallel>
+    </effects>
+    <instrument instrument="organ" effect="choirDemo">
+        <note measure="1" beat="1" duration="2.9" note="Ab4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4" duration="0.15" note="Gb4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4.25" duration="0.65" note="Gb4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="1" duration="1.65" note="Ab4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="2.75" duration="0.15" note="Ab4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="3" duration="1.9" note="Ab4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="1" duration="2.9" note="B3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4" duration="0.15" note="Bb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4.25" duration="0.65" note="Bb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="1" duration="1.65" note="B3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="2.75" duration="0.15" note="B3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="3" duration="1.9" note="B3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="1" duration="2.9" note="Ab3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4" duration="0.15" note="Gb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4.25" duration="0.65" note="Gb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="1" duration="1.65" note="Ab3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="2.75" duration="0.15" note="Ab3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="3" duration="1.9" note="Ab3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="1" duration="2.9" note="Eb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4" duration="0.15" note="Db3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="1" beat="4.25" duration="0.65" note="Db3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="1" duration="1.65" note="Eb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="2.75" duration="0.15" note="Eb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="2" beat="3" duration="1.9" note="Eb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="1" duration="2.9" note="Gb4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4" duration="0.15" note="Gb4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4.25" duration="0.65" note="Bb4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="1" duration="1.65" note="Ab4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="2.75" duration="0.15" note="Gb4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="3" duration="1.9" note="Ab4" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="1" duration="2.9" note="Bb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4" duration="0.15" note="Bb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4.25" duration="0.65" note="Bb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="1" duration="1.65" note="B3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="2.75" duration="0.15" note="B3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="3" duration="1.9" note="B3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="1" duration="2.9" note="Gb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4" duration="0.15" note="Gb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4.25" duration="0.65" note="Gb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="1" duration="1.65" note="Gb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="2.75" duration="0.15" note="Gb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="3" duration="1.9" note="Ab3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="1" duration="2.9" note="Db3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4" duration="0.15" note="Db3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="3" beat="4.25" duration="0.65" note="Bb2" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="1" duration="1.65" note="Eb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="2.75" duration="0.15" note="Eb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+        <note measure="4" beat="3" duration="1.9" note="Eb3" drawbar="876543210" leslie ="0.1" vibrato = "0.1"/>
+    </instrument>
+</score>

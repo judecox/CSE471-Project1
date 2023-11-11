@@ -1,6 +1,5 @@
 #pragma once
 #include "CEffect.h"
-#include <vector>
 #include <queue>
 class CFlange :
 	public CEffect
@@ -13,7 +12,7 @@ private:
 	double m_feedback;
 	double m_wetness;
 
-	std::vector<double> m_frameHistory;
+	std::queue<double> m_frameHistory;
 	int m_bufferIndex;
 	int m_delayIndex;
 

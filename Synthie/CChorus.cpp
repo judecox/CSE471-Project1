@@ -11,27 +11,21 @@ CChorus::CChorus(int channels, double sampleRate, double samplePeriod) : CEffect
 	m_wetness = 0.5;
 	m_delay = 1;
 
-	ResetBuffer();
-}
-
-void CChorus::ResetBuffer()
-{
-	m_bufferIndex = 0;
-	m_bufferSize = (int)std::ceil((m_channels + 1) * m_delay * m_sampleRate);
-	m_frameHistory = std::vector<double>(m_bufferSize);
-	std::fill(m_frameHistory.begin(), m_frameHistory.end(), 0);
+	Reset();
 }
 
 void CChorus::Process(const double* frameIn, double* frameOut, const double& time)
 {
 	// First calculate the waveform. This will be the waveform of the
 	// distortion in samples.
-	const int delayed = (int)std::ceil(m_channels * m_delay * m_sampleRate);
+	const int delay = int(m_delay * m_sampleRate + 0.5);
 	m_phase += m_frequency * m_samplePeriod;
 
-	if (frameIn[0] == 0)
+	for (size_t c = 0; c < m_channels; c++)
 	{
-		int yup = -1;
+		// Delayed signal
+		const double waveform = m_amplitude * sin((m_phase - c * m_balanceOffset) * 2 * PI);
+		m_frameHistory.push(frameIn[c] * waveform);
 	}
 
 	// Use frameHistory as a circular buffer.
@@ -39,25 +33,16 @@ void CChorus::Process(const double* frameIn, double* frameOut, const double& tim
 	{
 		const double input = frameIn[c];
 
-		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed - c, m_bufferSize));
-
-		// Avoid underflow.
-		if (i < 0)
-			i += m_bufferSize;
-
 		// Set output, include wetness.
-		const double waveform = m_amplitude * sin((m_phase - c * m_balanceOffset) * 2 * PI);
-		double output = input * (1.0 - m_wetness);
-		output += m_frameHistory[i] * waveform * m_wetness;
-
-		// Delayed signal
-		m_frameHistory[m_bufferIndex] = input;
-
-		// Next index
-		m_bufferIndex = (int)std::fmod(++m_bufferIndex, m_bufferSize);
-
-		// Write output
-		frameOut[c] = output;
+		if (delay * m_channels <= m_frameHistory.size())
+		{
+			frameOut[c] = input * (1.0 - m_wetness) + m_frameHistory.front() * m_wetness;
+			m_frameHistory.pop();
+		}
+		else
+		{
+			frameOut[c] = input;
+		}
 	}
 }
 
@@ -74,9 +59,6 @@ void CChorus::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 	{
 		value.ChangeType(VT_R8);
 		m_amplitude = value.dblVal;
-
-		// Need to reset to account for changes in amplitude.
-		ResetBuffer();
 	}
 	else if (name == L"phase")
 	{
@@ -97,14 +79,12 @@ void CChorus::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 	{
 		value.ChangeType(VT_R8);
 		m_delay = value.dblVal;
-
-		// Need to reset to account for changes in delay.
-		ResetBuffer();
 	}
 }
 
 void CChorus::Reset()
 {
 	m_bufferIndex = 0;
+	m_frameHistory = std::queue<double>();
 }
 

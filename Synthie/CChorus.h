@@ -1,6 +1,6 @@
 #pragma once
 #include "CEffect.h"
-#include <vector>
+#include <queue>
 class CChorus :
     public CEffect
 {
@@ -13,15 +13,13 @@ private:
 	double m_wetness;
 	double m_delay;
 
-	std::vector<double> m_frameHistory;
+	std::queue<double> m_frameHistory;
 	int m_bufferIndex;
 	int m_bufferSize;
 
 	// Contructors
 public:
 	CChorus(int channels, double sampleRate, double samplePeriod);
-
-	void ResetBuffer();
 
 	// Public methods
 public:
