@@ -1,4 +1,4 @@
-# Project 1: Multi-Component Music Synthesizer
+--# Project 1: Multi-Component Music Synthesizer
 [Placeholder audio. Replace.]
 
 
@@ -6,11 +6,11 @@ https://github.com/judecox/CSE471-Project1/assets/61844345/bd83dfd8-ac40-4593-85
 
 
 ## Group Members
-* Alex Charney
-* Jude Cox
-* Leo Hoerdeman
-* Ryan Chang
-* Kate Nagy
+* Alec Charney - Wavetable/Integration Management
+* Jude Cox - Piano/Git control
+* Leo Hoerdeman - Organ/Project Management
+* Ryan Chang - Effects/GitHub Presentation
+* Kate Nagy - Prerecorded synth/1-minute piece
 
 ## Navigation
 [Links to the component pages here. Example:]
