@@ -10,7 +10,6 @@
          <flange id="flange02" rate="0.7" amount="0.6" feedback="1" mix="0.5" gain="2" />
          <gate id="nonoise" threshold="0.2" attack="0.10" release="0.10" hold="0.50" />
       </serial>
-      
    </effects>
    <instrument instrument="organ" effect="CD_parallel01">
       <note measure="1" beat="1" duration="2.9" note="Ab4" drawbar="876543210" leslie="0.1"
