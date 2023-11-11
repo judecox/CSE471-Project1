@@ -1,6 +1,7 @@
 #pragma once
 #include "CEffect.h"
 #include <vector>
+#include <queue>
 class CFlange :
 	public CEffect
 {
@@ -12,9 +13,9 @@ private:
 	double m_feedback;
 	double m_wetness;
 
-	std::vector<double> m_frameHistory;
+	std::queue<double> m_frameHistory;
 	int m_bufferIndex;
-	int m_bufferSize;
+	int m_delayIndex;
 
 	// Contructors
 public:
@@ -27,5 +28,8 @@ public:
 	// Inherited via CEffect
 	virtual void Process(const double* frameIn, double* frameOut, const double& time);
 	virtual void XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value);
+
+	// Inherited via CEffect
+	void Reset() override;
 };
 

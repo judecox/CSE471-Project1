@@ -102,3 +102,9 @@ void CChorus::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 		ResetBuffer();
 	}
 }
+
+void CChorus::Reset()
+{
+	m_bufferIndex = 0;
+}
+

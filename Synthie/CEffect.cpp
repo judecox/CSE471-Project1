@@ -7,6 +7,7 @@ CEffect::CEffect(int channels, double sampleRate, double samplePeriod)
 	m_sampleRate = sampleRate;
 	m_samplePeriod = samplePeriod;
 	m_id = L"";
+	m_gain = 1;
 }
 
 void CEffect::XmlLoad(IXMLDOMNode* xml)
@@ -41,6 +42,11 @@ void CEffect::XmlLoad(IXMLDOMNode* xml)
 		{
 			// Every effect would have an id.
 			m_id = value.bstrVal;
+		}
+		else if (name == "gain")
+		{
+			value.ChangeType(VT_R8);
+			m_gain = value.dblVal;
 		}
 		else
 		{

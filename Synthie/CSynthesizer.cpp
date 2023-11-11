@@ -39,6 +39,11 @@ CSynthesizer::~CSynthesizer()
 //! Start the synthesizer
 void CSynthesizer::Start(void)
 {
+	for each (auto eff in m_effects)
+	{
+		eff->Reset();
+	}
+
 	m_instruments.clear();
 	m_currentNote = 0;
 	m_measure = 0;
@@ -164,7 +169,10 @@ bool CSynthesizer::Generate(double* frame)
 				double* frameout = (double*)calloc(m_channels, sizeof(double));
 				m_effectCatalog[instrument->m_effectID]->Process(frame, frameout, m_time);
 
-				std::copy(frameout, frameout + m_channels, frame);
+				for (int c = 0; c < GetNumChannels(); c++)
+				{
+					frame[c] = frameout[c] * m_effectCatalog[instrument->m_effectID]->m_gain;
+				}
 				free(frameout);
 			}
 		}

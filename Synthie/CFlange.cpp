@@ -8,13 +8,10 @@ CFlange::CFlange(int channels, double sampleRate, double samplePeriod) : CEffect
 	m_frequency = 1;
 	m_amplitude = 1;
 
-	m_bufferIndex = 0;
-	m_bufferSize = (int)std::ceil((m_channels + 1) * m_amplitude * m_sampleRate);
+	Reset();
 
 	m_feedback = 0.5;
 	m_wetness = 0.5;
-
-	m_frameHistory = std::vector<double>(m_bufferSize);
 }
 
 CFlange::~CFlange()
@@ -26,38 +23,71 @@ void CFlange::Process(const double* frameIn, double* frameOut, const double& tim
 {
 	// First calculate the waveform. This will be the waveform of the
 	// distortion in samples.
-	const double waveform = m_amplitude * sin(m_phase * 2 * PI);
+	//const double waveform = m_amplitude * sin(m_phase * 2 * PI);
+	const double waveform = 1;
 
-	const int delayed = (int)std::ceil(m_channels * m_amplitude * m_sampleRate);
 	m_phase += m_frequency * m_samplePeriod;
 
-	// Use frameHistory as a circular buffer.
-	for (int c = 0; c < m_channels; c++)
+	const double input = frameIn[0];
+	double output = 0;
+
+	if (m_delayIndex >= 0)
 	{
-		const double input = frameIn[c];
-		double output = 0;
-
-		int i = (int)std::ceil(std::fmod(m_bufferIndex - delayed - c, m_bufferSize));
-
-		// Avoid underflow.
-		if (i < 0)
-			i += m_bufferSize;
-
-		// Set output, include wetness.
-		output = input * waveform * (1.0 - m_wetness);
-		output += m_frameHistory[i] * m_wetness;
-
-
-		// Feedback
-		m_frameHistory[m_bufferIndex] = output * m_feedback +
-			frameIn[c] * (1 - m_feedback);
-
-		// Next index
-		m_bufferIndex = (int)std::fmod(++m_bufferIndex, m_bufferSize);
-
-		// Write output
-		frameOut[c] = output;
+		frameOut[0] = m_frameHistory.front();
+		m_frameHistory.pop();
 	}
+	else
+	{
+		frameOut[1] = input;
+	}
+	m_frameHistory.push(input);
+
+
+	// Next index
+	++m_bufferIndex;
+	++m_delayIndex;
+
+	//// Use frameHistory as a circular buffer.
+	//for (int c = 0; c < 1; c++)
+	//{
+	//	const double input = frameIn[c];
+	//	double output = 0;
+
+	//	if (m_delayIndex >= 0)
+	//	{
+	//		frameOut[c] = m_frameHistory.front();
+	//		m_frameHistory.pop();
+	//	}
+	//	else
+	//	{
+	//		frameOut[c] = input;
+	//	}
+	//	m_frameHistory.push(input);
+
+
+	//	// Next index
+	//	++m_bufferIndex;
+	//	++m_delayIndex;
+
+	//	//// Set output, include wetness.
+	//	//output = input * (1.0 - m_wetness);
+
+	//	//if (m_delayIndex >= 0)
+	//	//	output += m_frameHistory[m_delayIndex] * waveform * m_wetness;
+
+
+	//	//// Feedback
+	//	////m_frameHistory[m_bufferIndex] = input * waveform * m_feedback +
+	//	////	input * (1 - m_feedback);
+	//	//m_frameHistory.push_back(input);
+
+	//	//// Next index
+	//	//++m_bufferIndex;
+	//	//++m_delayIndex;
+
+	//	//// Write output
+	//	//frameOut[c] = output;
+	//}
 }
 
 void CFlange::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value)
@@ -89,4 +119,12 @@ void CFlange::XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& valu
 		value.ChangeType(VT_R8);
 		m_wetness = value.dblVal;
 	}
+}
+
+void CFlange::Reset()
+{
+	//m_delayIndex = -(int)std::ceil(m_channels * m_sampleRate);
+	m_delayIndex = -60000;
+	m_bufferIndex = 0;
+	m_frameHistory = std::queue<double>();
 }

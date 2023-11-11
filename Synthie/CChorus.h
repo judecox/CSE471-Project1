@@ -28,5 +28,8 @@ public:
 	// Inherited via CEffect
 	virtual void Process(const double* frameIn, double* frameOut, const double& time);
 	virtual void XmlLoadAttribute(const ATL::CComBSTR& name, ATL::CComVariant& value);
+
+	// Inherited via CEffect
+	void Reset() override;
 };
 
