@@ -5,6 +5,12 @@
          <choir id="CD_choir01" delay="0.3641" rate="0.2" amount="0.5" mix="0.5" />
          <choir id="CD_choir02" phase="0.1" delay="0.2" offset="1" rate="0.3" amount="0.5" mix="0.5" />
       </parallel>
+      <flange id="flange01" rate="0.5" amount="0.4" feedback="1" mix="0.5" gain="1.5" />
+      <serial id="flangellium">
+         <flange id="flange02" rate="0.7" amount="0.6" feedback="1" mix="0.5" gain="2" />
+         <gate id="nonoise" threshold="0.2" attack="0.10" release="0.10" hold="0.50" />
+      </serial>
+      
    </effects>
    <instrument instrument="organ" effect="CD_parallel01">
       <note measure="1" beat="1" duration="2.9" note="Ab4" drawbar="876543210" leslie="0.1"
@@ -578,7 +584,7 @@
       <note measure="24" beat="3" duration="2.9" note="Eb3" drawbar="876543210" leslie="0.1"
          vibrato="0.1" />
    </instrument>
-   <instrument instrument="wavetable">
+   <instrument instrument="wavetable" effect="flange01">
       <note measure="5" beat="1" duration="0.9" note="Ab4" />
       <note measure="5" beat="2" duration="1.9" note="B4" gliss="Db4" />
       <note measure="5" beat="4" duration="0.9" note="Db4" />
@@ -662,7 +668,7 @@
       <note measure="24" beat="2" duration="0.9" note="Bb4" />
       <note measure="24" beat="3" duration="2.9" note="Eb4" />
    </instrument>
-   <instrument instrument="piano">
+   <instrument instrument="piano" effect="flangellium">
       <note measure="9" beat="1" pedal="pressed" duration="1.4"
          note="WaveSamples/CompletePiano/G5#s.wav" />
       <note measure="9" beat="2.5" duration="0.4"
@@ -789,23 +795,28 @@
          note="WaveSamples/CompletePiano/B5s.wav" />
       <note measure="22" beat="4" duration="0.9"
          note="WaveSamples/CompletePiano/G5#s.wav" advkeydynamic="WaveSamples/CompletePiano/A5l.wav" />
-      />
-      <note measure="23" beat="1" duration="1.4" note="WaveSamples/CompletePiano/F5#s.wav"
-         advkeydynamic="WaveSamples/CompletePiano/F5#l.wav" />/> <note measure="23" beat="2.5"
+
+      <note
+         measure="23" beat="1" duration="1.4" note="WaveSamples/CompletePiano/F5#s.wav"
+         advkeydynamic="WaveSamples/CompletePiano/F5#l.wav" />
+      <note measure="23" beat="2.5"
          duration="0.4" note="WaveSamples/CompletePiano/E5s.wav" />
       <note measure="23" beat="3"
          duration="0.9" note="WaveSamples/CompletePiano/F5#s.wav" />
       <note measure="23" beat="4"
          duration="0.9" note="WaveSamples/CompletePiano/B5s.wav"
-         advkeydynamic="WaveSamples/CompletePiano/B5l.wav" />/> <note measure="24" beat="1"
+         advkeydynamic="WaveSamples/CompletePiano/B5l.wav" />
+      <note measure="24" beat="1"
          duration="0.9" note="WaveSamples/CompletePiano/B5s.wav"
-         advkeydynamic="WaveSamples/CompletePiano/B5l.wav" />/> <note measure="24" beat="2"
+         advkeydynamic="WaveSamples/CompletePiano/B5l.wav" />
+      <note measure="24" beat="2"
          duration="0.75" note="WaveSamples/CompletePiano/G5#s.wav" />
       <note measure="24" beat="2.75"
          duration="0.25" note="WaveSamples/CompletePiano/F5#s.wav" />
       <note measure="24" beat="3"
          duration="2.9" note="WaveSamples/CompletePiano/G5#s.wav"
-         advkeydynamic="WaveSamples/CompletePiano/G5#l.wav" />"/> </instrument>
+         advkeydynamic="WaveSamples/CompletePiano/G5#l.wav" />
+   </instrument>
    <recording filename="CompletedRecordingDemo-CorrectSpacing.wav" measure="13" beat="1">
       <effectrecorded measure="13" beat="1" effect="0" parameter="0.3" />
       <effectrecorded measure="14" beat="3.5" effect="1" parameter="0.7" />
