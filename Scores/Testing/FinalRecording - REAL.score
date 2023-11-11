@@ -372,55 +372,55 @@
       <note measure="24" beat="3" duration="2.9" note="Eb4"/>
    </instrument>
    <instrument instrument="piano">
-      <note measure="9" beat="1" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
+      <note measure="9" beat="1" pedal="pressed" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="9" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="9" beat="3" duration="0.9" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="9" beat="4" duration="0.9" note="WaveSamples/CompletePiano/D6s"/>
-      <note measure="10" beat="1" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
+      <note measure="10" beat="1" pedal="released" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="10" beat="2" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="10" beat="3" duration="0.5" note="WaveSamples/CompletePiano/Bb5"/>
       <note measure="10" beat="3.5" duration="0.25" note="WaveSamples/CompletePiano/B5s"/>
-      <note measure="10" beat="3.75" duration="0.25" note="WaveSamples/CompletePiano/B5s"/>
+      <note measure="10" beat="3.75" pedal="pressed" duration="0.25" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="10" beat="4" duration="0.9" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="11" beat="1" duration="1.4" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="11" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/E5s"/>
-      <note measure="11" beat="3" duration="0.9" note="WaveSamples/CompletePiano/G5s"/>
+      <note measure="11" beat="3" pedal="released" duration="0.9" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="11" beat="4" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="12" beat="1" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="12" beat="2" duration="0.75" note="WaveSamples/CompletePiano/A5s"/>
-      <note measure="12" beat="2.75" duration="0.25" note="WaveSamples/CompletePiano/G5s"/>
+      <note measure="12" beat="2.75" pedal="pressed" duration="0.25" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="12" beat="3" duration="1.9" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="13" beat="1" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="13" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/G5s"/>
-      <note measure="13" beat="3" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
+      <note measure="13" beat="3" pedal="released" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="13" beat="4.5" duration="0.4" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="14" beat="1" duration="1.4" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="14" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/D5s"/>
-      <note measure="14" beat="3" duration="0.9" note="WaveSamples/CompletePiano/E5s"/>
+      <note measure="14" beat="3" pedal="pressed" duration="0.9" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="14" beat="4" duration="0.9" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="15" beat="1" duration="1.4" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="15" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/E5s"/>
-      <note measure="15" beat="3" duration="1.4" note="WaveSamples/CompletePiano/E5s"/>
+      <note measure="15" beat="3" pedal="released" duration="1.4" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="15" beat="4.5" duration="0.15" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="15" beat="4.75" duration="0.15" note="WaveSamples/CompletePiano/D5s"/>
       <note measure="16" beat="1" duration="0.9" note="WaveSamples/CompletePiano/B4s"/>
-      <note measure="16" beat="2" duration="0.9" note="WaveSamples/CompletePiano/D5s"/>
+      <note measure="16" beat="2" pedal="pressed" duration="0.9" note="WaveSamples/CompletePiano/D5s"/>
       <note measure="16" beat="3" duration="1.9" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="17" beat="1" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
-      <note measure="17" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/G5s"/>
+      <note measure="17" beat="2.5" duration="0.4" keydynamic="1" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="17" beat="3" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="17" beat="4.5" duration="0.4" note="WaveSamples/CompletePiano/B5s"/>
-      <note measure="18" beat="1" duration="1.4" note="WaveSamples/CompletePiano/B5s"/>
+      <note measure="18" beat="1" duration="1.4" keydynamic="0.75" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="18" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="18" beat="3" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="18" beat="4" duration="0.65" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="18" beat="4.75" duration="0.25" note="WaveSamples/CompletePiano/G5s"/>
-      <note measure="19" beat="1" duration="1.4" note="WaveSamples/CompletePiano/E5s"/>
+      <note measure="19" beat="1" duration="1.4" keydynamic="0.5" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="19" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="19" beat="3" duration="1.4" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="19" beat="4.5" duration="0.15" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="19" beat="4.75" duration="0.15" note="WaveSamples/CompletePiano/E5s"/>
-      <note measure="20" beat="1" duration="0.9" note="WaveSamples/CompletePiano/G5s"/>
+      <note measure="20" beat="1" duration="0.9" keydynamic="0.25" note="WaveSamples/CompletePiano/G5s"/>
       <note measure="20" beat="2" duration="0.9" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="20" beat="3" duration="1.9" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="21" beat="1" duration="1.4" note="WaveSamples/CompletePiano/A5s"/>
@@ -432,15 +432,15 @@
       <note measure="22" beat="3" duration="0.5" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="22" beat="3.5" duration="0.25" note="WaveSamples/CompletePiano/B5s"/>
       <note measure="22" beat="3.75" duration="0.25" note="WaveSamples/CompletePiano/B5s"/>
-      <note measure="22" beat="4" duration="0.9" note="WaveSamples/CompletePiano/A5s"/>
-      <note measure="23" beat="1" duration="1.4" note="WaveSamples/CompletePiano/G5s"/>
+      <note measure="22" beat="4" duration="0.9" note="WaveSamples/CompletePiano/A5s" advkeydynamic="WaveSamples/CompletePiano/A5l.wav"/>/>
+      <note measure="23" beat="1" duration="1.4" note="WaveSamples/CompletePiano/G5s" advkeydynamic="WaveSamples/CompletePiano/G5l.wav"/>/>
       <note measure="23" beat="2.5" duration="0.4" note="WaveSamples/CompletePiano/E5s"/>
       <note measure="23" beat="3" duration="0.9" note="WaveSamples/CompletePiano/G5s"/>
-      <note measure="23" beat="4" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
-      <note measure="24" beat="1" duration="0.9" note="WaveSamples/CompletePiano/B5s"/>
+      <note measure="23" beat="4" duration="0.9" note="WaveSamples/CompletePiano/B5s" advkeydynamic="WaveSamples/CompletePiano/B5l.wav"/>/>
+      <note measure="24" beat="1" duration="0.9" note="WaveSamples/CompletePiano/B5s" advkeydynamic="WaveSamples/CompletePiano/B5l.wav"/>/>
       <note measure="24" beat="2" duration="0.75" note="WaveSamples/CompletePiano/A5s"/>
       <note measure="24" beat="2.75" duration="0.25" note="WaveSamples/CompletePiano/G5s"/>
-      <note measure="24" beat="3" duration="2.9" note="WaveSamples/CompletePiano/A5s"/>
+      <note measure="24" beat="3" duration="2.9" note="WaveSamples/CompletePiano/A5s" advkeydynamic="WaveSamples/CompletePiano/A5l.wav"/>"/>
    </instrument>
    <recording filename="CompletedRecordingDemo-CorrectSpacing.wav" measure="13" beat="1">
       <effectrecorded measure="13" beat="1" effect="0" parameter="0.3"/>
