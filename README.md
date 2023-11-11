@@ -27,10 +27,9 @@ effects within our score. Each note is tied to one instrument, and each
 instrument may be tied to one or more effects. We also allow any mixture of
 parallel or serial effects.
 
-The score file for [Title of Selection Here] is shown below for reference.
+A sample score file is shown below for reference.
 
 ```xml
-<!--NOT ACTUAL SCORE FILE! EXAMPLE ONLY! NEED REPLACEMENT!-->
 <?xml version="1.0" encoding="utf-8"?>
 <score bpm="120" beatspermeasure="2">
 	<effects>
@@ -74,5 +73,4 @@ The score file for [Title of Selection Here] is shown below for reference.
 		<note measure="8" beat="1" duration="3" note="D4" />
 	</instrument>
 </score>
-<!--NOT ACTUAL SCORE FILE! EXAMPLE ONLY! NEED REPLACEMENT!-->
 ```
