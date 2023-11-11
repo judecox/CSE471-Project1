@@ -16,7 +16,7 @@ The Leslie speaker can be specified as a double range from 0 to 1 per note in th
 
 
 ## Demo XML and Output File
-[OrganTest.score](..\Scores\Testing\OrganTest.score)
+[OrganTest.score](../Scores/Testing/OrganTest.score)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <score bpm="120" beatspermeasure="4">
@@ -45,4 +45,4 @@ The Leslie speaker can be specified as a double range from 0 to 1 per note in th
    </instrument>
 </score>
 ```
-[Audio Output](..\Audio%20Outputs\OrganDemo.wav)
+[Audio Output](../Audio%20Outputs/OrganDemo.wav)
