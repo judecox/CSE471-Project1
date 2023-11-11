@@ -21,3 +21,7 @@ The start and end times of a loopable sequence in the samples are stored in the 
 **Glissando**
 
 On notes marked with a "gliss" parameter in the XML score, the wavetable will play all the notes in-between the marked note and the note specified in the "gliss" parameter one at a time to produce a discreet glissando effect. This glissando can go up and down and is entirely non-present on notes without a "gliss" parameter.
+
+**Final Recording**
+
+https://github.com/judecox/CSE471-Project1/blob/master/Audio%20Outputs%20-%20FINAL%20RECORDINGS/wavetableRecording.wav
