@@ -442,6 +442,6 @@
       <note measure="24" beat="2.75" duration="0.25" note="Gb5"/>
       <note measure="24" beat="3" duration="2.9" note="Ab5"/>
    </instrument>
-   <recording filename="C:\Users\nagy1\OneDrive\Desktop\CompletedRecordingDemo-CorrectSpacing.wav" measure="13" beat="1">
+   <recording filename="CompletedRecordingDemo-CorrectSpacing.wav" measure="13" beat="1">
    </recording>
 </score>
