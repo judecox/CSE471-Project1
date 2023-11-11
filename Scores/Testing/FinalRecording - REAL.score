@@ -290,7 +290,7 @@
    <instrument instrument="wavetable">
       <note measure="5" beat="1" duration="0.9" note="Ab4"/>
       <note measure="5" beat="2" duration="1.9" note="B4"/>
-      <note measure="5" beat="4" duration="0.9" note="Db5"/>
+      <note measure="5" beat="4" duration="0.9" note="Db4"/>
       <note measure="6" beat="1" duration="0.9" note="B4"/>
       <note measure="6" beat="2" duration="0.4" note="Ab4"/>
       <note measure="6" beat="2.5" duration="0.4" note="E4"/>
@@ -321,7 +321,7 @@
       <note measure="8" beat="3" duration="0.9" note="Eb4"/>
       <note measure="8" beat="4" duration="0.9" note="Eb4"/>
       <note measure="9" beat="1" duration="2.9" note="B4"/>
-      <note measure="9" beat="4" duration="0.9" note="Db5"/>
+      <note measure="9" beat="4" duration="0.9" note="Db4"/>
       <note measure="10" beat="1" duration="0.9" note="B4"/>
       <note measure="10" beat="2" duration="0.4" note="Ab4"/>
       <note measure="10" beat="2.5" duration="0.4" note="E4"/>
@@ -347,7 +347,7 @@
       <note measure="12" beat="2" duration="0.4" note="Db4"/>
       <note measure="12" beat="3" duration="1.9" note="Eb4"/>
       <note measure="21" beat="1" duration="2.9" note="B4"/>
-      <note measure="21" beat="4" duration="0.9" note="Db5"/>
+      <note measure="21" beat="4" duration="0.9" note="Db4"/>
       <note measure="22" beat="1" duration="0.9" note="B4"/>
       <note measure="22" beat="2" duration="0.4" note="Ab4"/>
       <note measure="22" beat="2.5" duration="0.4" note="E4"/>
@@ -362,9 +362,9 @@
       <note measure="22" beat="4" duration="0.9" note="Eb4"/>
       <note measure="23" beat="1" duration="2.9" note="Bb4"/>
       <note measure="23" beat="4" duration="0.9" note="B4"/>
-      <note measure="24" beat="1" duration="0.9" note="Eb5"/>
-      <note measure="24" beat="2" duration="0.9" note="Db5"/>
-      <note measure="24" beat="3" duration="2.9" note="C5"/>
+      <note measure="24" beat="1" duration="0.9" note="Eb4"/>
+      <note measure="24" beat="2" duration="0.9" note="Db4"/>
+      <note measure="24" beat="3" duration="2.9" note="C4"/>
       <note measure="23" beat="1" duration="2.9" note="Db4"/>
       <note measure="23" beat="4" duration="0.9" note="Eb4"/>
       <note measure="24" beat="1" duration="0.9" note="Gb4"/>
