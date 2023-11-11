@@ -6,7 +6,7 @@ using namespace std;
 CPianoBuild::CPianoBuild()
 {
 	m_duration = 1.0;
-	m_volume = 1.0;
+	m_volume = 2.5;
 	m_pedal = false;
 	m_playPedalDown = false;
 	m_playPedalUp = false;
