@@ -1,5 +1,5 @@
-# [Piano Synthesizer]
-[Developed by Jude Cox]
+# Piano Synthesizer
+Developed by Jude Cox
 
 The Piano component within the Synthie project loads and generates sounds from a series of 88
 note samples, representing each note found on a classical 88-key piano. 
@@ -39,7 +39,7 @@ effects within our score. Each note is tied to one instrument, and each
 instrument may be tied to one or more effects. We also allow any mixture of
 parallel or serial effects.
 
-The score file for [FinalPianoDemo] is shown below for reference.
+The score file for FinalPianoDemo is shown below for reference.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
