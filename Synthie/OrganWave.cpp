@@ -3,7 +3,7 @@
 
 COrganWave::COrganWave()
 {
-    m_amp = .9;
+    m_amp = .5;
     m_freq = 440;
 
 	m_harmonics.resize(9);
