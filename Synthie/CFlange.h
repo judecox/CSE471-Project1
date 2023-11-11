@@ -13,7 +13,7 @@ private:
 	double m_feedback;
 	double m_wetness;
 
-	std::queue<double> m_frameHistory;
+	std::vector<double> m_frameHistory;
 	int m_bufferIndex;
 	int m_delayIndex;
 
